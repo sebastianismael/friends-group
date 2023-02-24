@@ -1,14 +1,19 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-test:
     docker:
-      - image: circleci/openjdk:11-jdk-stretch
+      - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - run: mvn clean test
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+      - run:
+          name: Test
+          command: mvn test
 
 workflows:
-  build-workflow:
+  sample:
     jobs:
-      - build
+      - build-and-test
