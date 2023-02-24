@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11-jdk-stretch
+    steps:
+      - checkout
+      - run: mvn clean test
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
