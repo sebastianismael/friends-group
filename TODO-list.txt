@@ -1,0 +1,33 @@
+- mover la carga de datos de prueba de un test a un use case ===> DONE!!!
+
+- levantar todoo con docker-compose ===> DONE!!!
+
+- externalizar los secrets y las configs de entorno ===> DONE!!!
+
+- habria que levantar una DB en MM para que los tests corran contra esa DB ===> DONE!!!
+
+- funcional: si alguien se agrega al grupo aparece en el balnace de gastos anteriores a que se agregue, es decis, no
+se esta manejando temporalidad
+
+- manejar http methods en la parte web (controllers)
+
+- agregar log4j ===> DONE!!!
+
+- las URLs deberian usar el user id en lugar del name, para que pueda haber amigos con mismo nombre
+
+- mecanismo para proveer las implementaciones de los repositorios que estan en infraestructura.
+    * mejora #1: usa una libreria externa, no ecncontre un mecanismo nativo en java para conocer las clases que
+    implementan una interface, buscar alguna forma nativa de resolverlo
+    * mejora #2: manejar los repositorios como singleton, ya que estamos instanciando el repo cada vez.
+    * mejora #3: no soporta mas de una implementacion de la interface
+
+- persistencia: hay un mecanismo para abstraerte en los repositorios del manejo de las sql exceptions de jdbc,
+ver si hay forma de mejorarlo
+
+- binding de objetos compuestos en los repositorios, agrega mucho codigo y es muy sucio, en la mayoria de los casos
+no se estan cableando los objetos completos como lo haria hibernate. Habria que evaluar que se hace con eso, o se deja
+un modelo mas anemico sin bindear todos los obketos que cmpeonen el composite, o se agrega todoo el codigo sql para
+completarlos (aunque nos se usen) o se usa un ORM
+
+- Los test de persistencia tienen muuucho codigo para cargar los datos en la DB, ver si se puede mejorar eso para que
+quede mas prolijo y escalable ===> DONE!!!
