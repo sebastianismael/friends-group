@@ -6,7 +6,7 @@
 
 - habria que levantar una DB en MM para que los tests corran contra esa DB ===> DONE!!!
 
-- funcional: si alguien se agrega al grupo aparece en el balnace de gastos anteriores a que se agregue, es decis, no
+- funcional: si alguien se agrega al grupo aparece en el balance de gastos anteriores a que se agregue, es decir, no
 se esta manejando temporalidad
 
 - manejar http methods en la parte web (controllers)
@@ -31,3 +31,5 @@ completarlos (aunque nos se usen) o se usa un ORM
 
 - Los test de persistencia tienen muuucho codigo para cargar los datos en la DB, ver si se puede mejorar eso para que
 quede mas prolijo y escalable ===> DONE!!!
+
+- los test de integracion necesitan que se levante docker a mano, y que se cree la base de datos en
