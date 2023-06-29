@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PaymentJdbcRepositoryTest extends JdbcRepositoryTest {
+public class PaymentJdbcRepositoryTestIT extends JdbcRepositoryTestIT {
 
     private final String USER_1 = "user_1";
     private final String USER_2 = "user_2";

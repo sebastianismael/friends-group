@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class DataBaseConnectionTest extends JdbcRepositoryTest{
+public class DataBaseConnectionTestITIT extends JdbcRepositoryTestIT {
 
     @Test
     public void checkDbConnection(){

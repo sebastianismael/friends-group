@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 import static ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.*;
 
-public abstract class JdbcRepositoryTest {
+public abstract class JdbcRepositoryTestIT {
 
     protected Connection connection;
     protected DataSource dataSource = MariaDb4TestDataSource.instance();

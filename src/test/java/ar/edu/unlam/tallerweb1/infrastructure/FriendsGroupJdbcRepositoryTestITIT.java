@@ -11,7 +11,7 @@ import java.util.List;
 import static ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FriendsGroupJdbcRepositoryTest extends JdbcRepositoryTest {
+public class FriendsGroupJdbcRepositoryTestITIT extends JdbcRepositoryTestIT {
 
     private final String USER_1 = "user_1";
     private final String USER_2 = "user_2";
