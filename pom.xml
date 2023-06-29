@@ -60,36 +60,43 @@
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.20.1</version>
+				<version>0.43.0</version>
+				<configuration>
+					<images>
+						<image>
+							<name>mysql:5.7</name>
+							<run>
+								<platform>linux/x86_64</platform>
+								<ports>
+									<port>3306:3306</port>
+								</ports>
+								<env>
+									<MYSQL_ALLOW_EMPTY_PASSWORD>yes</MYSQL_ALLOW_EMPTY_PASSWORD>
+								</env>
+								<wait>
+									<time>30000</time>
+								</wait>
+							</run>
+						</image>
+					</images>
+				</configuration>
 				<executions>
 					<execution>
-						<id>prepare-it-database</id>
+						<id>start</id>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>start</goal>
 						</goals>
-						<configuration>
-							<images>
-								<image>
-									<name>postgres:9.5.4</name>
-									<alias>it-database</alias>
-									<run>
-										<ports>
-											<port>it-database.port:5432</port>
-										</ports>
-										<wait>
-											<log>(?s)database system is ready to accept connections.*database system is ready to accept connections</log>
-											<time>10000</time>
-										</wait>
-									</run>
-								</image>
-							</images>
-						</configuration>
 					</execution>
 					<execution>
-						<id>remove-it-database</id>
+						<id>stop</id>
+						<phase>post-integration-test</phase>
 						<goals>
 							<goal>stop</goal>
 						</goals>
+						<configuration>
+							<removeVolumes>true</removeVolumes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -146,7 +153,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version>
+			<version>5.1.35</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.vorburger.mariaDB4j</groupId>
@@ -162,12 +169,12 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.12.4</version>
+			<version>2.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.12.4</version>
+			<version>2.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
