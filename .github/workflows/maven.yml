@@ -15,7 +15,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  Simple-Build:
     permissions: write-all    
     runs-on: ubuntu-latest
 
