@@ -20,59 +20,31 @@ public abstract class JdbcRepository {
     }
     private static Logger logger = LoggerFactory.getLogger(JdbcRepository.class);
     protected <T> List<T> searchInTransaction(BiFunction<Connection, String, List<T>> function, String inputValue){
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+        try (final Connection conn = dataSource.getConnection()){
             return function.apply(conn, inputValue);
 
         } catch (SQLException e) {
             error(e);
             throw new RuntimeException(e);
-        } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-                error(e);
-                throw new RuntimeException(e);
-            }
         }
     }
 
     protected <T> T findInTransaction(BiFunction<Connection, String, T> function, String inputValue){
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+        try (final Connection conn = dataSource.getConnection()){
             return function.apply(conn, inputValue);
-
         } catch (SQLException e) {
             error(e);
             throw new RuntimeException(e);
-        } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-                error(e);
-                throw new RuntimeException(e);
-            }
         }
     }
 
     protected <T> void executeInTransaction(Consumer<Connection> function){
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+        try (final Connection conn = dataSource.getConnection()){
             function.accept(conn);
 
         } catch (SQLException e) {
             error(e);
             throw new RuntimeException(e);
-        } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-                error(e);
-                throw new RuntimeException(e);
-            }
         }
     }
 
