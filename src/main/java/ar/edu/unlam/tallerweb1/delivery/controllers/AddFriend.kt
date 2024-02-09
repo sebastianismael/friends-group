@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.delivery.controllers
 
 import ar.edu.unlam.tallerweb1.delivery.Controller
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.FRIEND_ADDED
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.FRIEND_ADDED
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
 import javax.servlet.http.HttpServletRequest
 
