@@ -3,10 +3,8 @@ package ar.edu.unlam.tallerweb1.infrastructure
 import ar.edu.unlam.tallerweb1.domain.UserRepository
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.User
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.createGroup
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.getFriendsGroupId
-import org.assertj.core.api.Assertions
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createGroup
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.getFriendsGroupId
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.SQLException

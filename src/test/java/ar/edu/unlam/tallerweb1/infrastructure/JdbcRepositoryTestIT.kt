@@ -3,7 +3,13 @@ package ar.edu.unlam.tallerweb1.infrastructure
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
 import ar.edu.unlam.tallerweb1.infrastructure.utils.HSQLDB4TestDataSource.Companion.instance
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper
 import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.*
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createExpent
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createGroup
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createUser
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.getFriendsGroupId
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.getUserId
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import java.sql.Connection
