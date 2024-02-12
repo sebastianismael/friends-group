@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.infrastructure;
 
 import ar.edu.unlam.tallerweb1.domain.model.User;
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource;
-import ar.edu.unlam.tallerweb1.infrastructure.utils.MariaDb4TestDataSource;
+import ar.edu.unlam.tallerweb1.infrastructure.utils.HSQLDB4TestDataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -16,7 +16,7 @@ import static ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelpe
 public abstract class JdbcRepositoryTestIT {
 
     protected Connection connection;
-    protected DataSource dataSource = MariaDb4TestDataSource.instance();
+    protected DataSource dataSource = HSQLDB4TestDataSource.instance();
 
     @BeforeEach
     public void init() throws SQLException {
