@@ -22,7 +22,7 @@ abstract class JdbcRepositoryTestIT {
     @BeforeEach
     @Throws(SQLException::class)
     fun init() {
-        connection = dataSource.connection
+        connection = dataSource.getConnection()
     }
 
     @AfterEach

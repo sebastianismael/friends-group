@@ -19,7 +19,7 @@ class LoadData : Controller {
     private val GROUP = "group_1"
     override fun invoke(request: HttpServletRequest): String {
         try {
-            connection = MySqlDataSource.instance().connection
+            connection = MySqlDataSource.instance().getConnection()
 
             val friendsGroupId = createAgroup(GROUP)
             createUser(USER_1, friendsGroupId)

@@ -38,21 +38,21 @@ class HSQLDB4TestDataSource private constructor() : DataSource {
     @Throws(SQLException::class)
     private fun createTables() {
         try {
-            connection.createStatement().execute("drop table payment")
-            connection.createStatement().execute("drop table shared_expenses")
-            connection.createStatement().execute("drop table user")
-            connection.createStatement().execute("drop table friends_group")
+            getConnection().createStatement().execute("drop table payment")
+            getConnection().createStatement().execute("drop table shared_expenses")
+            getConnection().createStatement().execute("drop table user")
+            getConnection().createStatement().execute("drop table friends_group")
         } catch (ignored: Exception) {
         }
 
-        connection.createStatement().execute(
+        getConnection().createStatement().execute(
                 """create table friends_group(
                           id INT NOT NULL IDENTITY,
                           name VARCHAR(100) NOT NULL,
                     )"""
             )
 
-        connection.createStatement().execute(
+        getConnection().createStatement().execute(
                 """create table user(
                          id INT NOT NULL IDENTITY,
                          name VARCHAR(100) NOT NULL,
@@ -61,7 +61,7 @@ class HSQLDB4TestDataSource private constructor() : DataSource {
                     )"""
             )
 
-        connection.createStatement().execute(
+        getConnection().createStatement().execute(
                 """create table shared_expenses(
                         id INT NOT NULL IDENTITY,
                         friends_group_id INT NOT NULL,
@@ -75,7 +75,7 @@ class HSQLDB4TestDataSource private constructor() : DataSource {
                     )"""
             )
 
-        connection.createStatement().execute(
+        getConnection().createStatement().execute(
                 """create table payment(
                         id INT NOT NULL IDENTITY,
                         payer INT NOT NULL,

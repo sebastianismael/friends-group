@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest
 class CleanData : Controller {
     override fun invoke(request: HttpServletRequest): String {
         try {
-            val connection = MySqlDataSource.instance().connection
+            val connection = MySqlDataSource.instance().getConnection()
             connection.createStatement().execute("delete from payment")
             connection.createStatement().execute("delete from shared_expenses")
             connection.createStatement().execute("delete from user")
