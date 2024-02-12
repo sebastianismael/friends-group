@@ -20,7 +20,7 @@ public class PaymentJdbcRepository extends JdbcRepository implements PaymentRepo
     }
 
     @Override
-    public List<Payment> findPaymentsOf(Long expentId) {
+    public List<Payment> findPaymentsOf(long expentId) {
         return searchInTransaction((connection, x) -> { // TODO mejorar esto, no es necesario.
             List<Payment> found = new LinkedList<>();
             SharedExpent expent = getExpent(connection, expentId);
@@ -33,7 +33,7 @@ public class PaymentJdbcRepository extends JdbcRepository implements PaymentRepo
                 found.add(buildPayment(connection, expent, rs));
             }
             return found;
-        }, expentId.toString());
+        }, String.valueOf(expentId));
     }
 
     private Payment buildPayment(Connection connection, SharedExpent expent, ResultSet payments) {
