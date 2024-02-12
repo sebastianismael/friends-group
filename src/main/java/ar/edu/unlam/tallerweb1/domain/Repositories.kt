@@ -8,16 +8,16 @@ import org.reflections.scanners.SubTypesScanner
 class Repositories {
 
     companion object {
-        fun getSharedExpensesRepository(): SharedExpensesRepository =
+        fun getSharedExpensesRepository() =
             getRepository(SharedExpensesRepository::class.java, MySqlDataSource.instance())
 
-        fun getUserRepository(): UserRepository =
+        fun getUserRepository() =
             getRepository(UserRepository::class.java, MySqlDataSource.instance())
 
-        fun getFriendsGroupRepository(): FriendsGroupRepository =
+        fun getFriendsGroupRepository() =
             getRepository(FriendsGroupRepository::class.java, MySqlDataSource.instance())
 
-        fun getPaymentRepository(): PaymentRepository =
+        fun getPaymentRepository() =
             getRepository(PaymentRepository::class.java, MySqlDataSource.instance())
 
         // TODO mecanismo para proveer las implementaciones de los repositorios que estan en infraestructura.
