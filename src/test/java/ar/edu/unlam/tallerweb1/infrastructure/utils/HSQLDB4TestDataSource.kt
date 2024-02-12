@@ -1,21 +1,33 @@
 package ar.edu.unlam.tallerweb1.infrastructure.utils
 
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.slf4j.LoggerFactory.getLogger
-import java.sql.Connection
-import java.sql.DriverManager
 import java.sql.DriverManager.getConnection
 import java.sql.SQLException
+import kotlin.concurrent.Volatile
 
-class MariaDb4TestDataSource private constructor() : DataSource {
-    private val URL = "jdbc:mysql://localhost"
-    private val USER = "root"
+class HSQLDB4TestDataSource private constructor() : DataSource {
+    private val URL = "jdbc:hsqldb:mem:db_test"
+    private val USER = "sa"
     private val PASSWORD = ""
+
+    companion object {
+        private val LOGGER: Logger = getLogger(HSQLDB4TestDataSource::class.java)
+
+        @Volatile
+        private var INSTANCE: HSQLDB4TestDataSource? = null
+
+        fun instance() =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: HSQLDB4TestDataSource().also { INSTANCE = it }
+            }
+    }
+
+    @Throws(SQLException::class)
+    override fun getConnection() = getConnection(URL, USER, PASSWORD)
 
     init {
         try {
-            createDB()
             createTables()
         } catch (e: Exception) {
             LOGGER.error(e.message, e)
@@ -33,30 +45,25 @@ class MariaDb4TestDataSource private constructor() : DataSource {
         } catch (ignored: Exception) {
         }
 
-        connection
-            .createStatement().execute(
+        connection.createStatement().execute(
                 """create table friends_group(
-                          id INT NOT NULL AUTO_INCREMENT,
+                          id INT NOT NULL IDENTITY,
                           name VARCHAR(100) NOT NULL,
-                          PRIMARY KEY ( id )
                     )"""
             )
 
-        connection
-            .createStatement().execute(
+        connection.createStatement().execute(
                 """create table user(
-                         id INT NOT NULL AUTO_INCREMENT,
+                         id INT NOT NULL IDENTITY,
                          name VARCHAR(100) NOT NULL,
                          friends_group_id INT,
                          FOREIGN KEY (friends_group_id) REFERENCES friends_group(id),
-                         PRIMARY KEY ( id )
                     )"""
             )
 
-        connection
-            .createStatement().execute(
+        connection.createStatement().execute(
                 """create table shared_expenses(
-                        id INT NOT NULL AUTO_INCREMENT,
+                        id INT NOT NULL IDENTITY,
                         friends_group_id INT NOT NULL,
                         owner INT NOT NULL,
                         amount FLOAT NOT NULL,
@@ -65,43 +72,18 @@ class MariaDb4TestDataSource private constructor() : DataSource {
                         date DATETIME,
                         FOREIGN KEY (friends_group_id) REFERENCES friends_group(id),
                         FOREIGN KEY (owner) REFERENCES user(id),
-                        PRIMARY KEY ( id )
                     )"""
             )
 
-        connection
-            .createStatement().execute(
+        connection.createStatement().execute(
                 """create table payment(
-                        id INT NOT NULL AUTO_INCREMENT,
+                        id INT NOT NULL IDENTITY,
                         payer INT NOT NULL,
                         expent_id INT NOT NULL,
                         amount FLOAT NOT NULL,
                         FOREIGN KEY (payer) REFERENCES user(id),
                         FOREIGN KEY (expent_id) REFERENCES shared_expenses(id),
-                        PRIMARY KEY ( id )
                     )"""
             )
-    }
-
-    private fun createDB() {
-        try {
-            getConnection(URL, USER, PASSWORD)
-                .createStatement()
-                .execute("CREATE DATABASE IF NOT EXISTS test")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @Throws(SQLException::class)
-    override fun getConnection(): Connection = getConnection("$URL/test", USER, PASSWORD)
-
-    companion object {
-        private val LOGGER: Logger = getLogger(MariaDb4TestDataSource::class.java)
-        private val INSTANCE = MariaDb4TestDataSource()
-
-        fun instance(): MariaDb4TestDataSource {
-            return INSTANCE
-        }
     }
 }

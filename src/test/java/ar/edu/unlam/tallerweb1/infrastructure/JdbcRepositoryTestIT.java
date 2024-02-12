@@ -16,7 +16,7 @@ import static ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelpe
 public abstract class JdbcRepositoryTestIT {
 
     protected Connection connection;
-    protected DataSource dataSource = HSQLDB4TestDataSource.instance();
+    protected DataSource dataSource = HSQLDB4TestDataSource.Companion.instance();
 
     @BeforeEach
     public void init() throws SQLException {
