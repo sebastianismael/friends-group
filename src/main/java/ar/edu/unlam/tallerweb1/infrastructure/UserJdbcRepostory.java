@@ -22,6 +22,7 @@ public class UserJdbcRepostory extends JdbcRepository implements UserRepository 
             final PreparedStatement ps = prepareStatement(connection, sql);
             setString(1, user.getName(), ps);
             execute(ps);
+            return null;
         });
     }
 
@@ -32,6 +33,7 @@ public class UserJdbcRepostory extends JdbcRepository implements UserRepository 
             setString(1, user.getName(), ps);
             setLong(2, user.getFriendsGroup().getId(), ps);
             execute(ps);
+            return null;
         });
     }
 

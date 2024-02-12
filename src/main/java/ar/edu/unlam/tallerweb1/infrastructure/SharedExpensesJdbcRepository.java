@@ -8,7 +8,6 @@ import ar.edu.unlam.tallerweb1.domain.model.User;
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
@@ -54,6 +53,7 @@ public class SharedExpensesJdbcRepository extends JdbcRepository implements Shar
             setString(5, ExpentStatus.OPEN.name(), ps);
             setDate(6, sharedExpent.getDate(), ps);
             execute(ps);
+            return null;
         });
     }
 
