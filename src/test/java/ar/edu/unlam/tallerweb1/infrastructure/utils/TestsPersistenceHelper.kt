@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.infrastructure.utils
 
-import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus
+import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus.OPEN
+import java.lang.System.currentTimeMillis
 import java.sql.Connection
 import java.sql.Date
 import java.sql.SQLException
@@ -9,10 +10,10 @@ class TestsPersistenceHelper {
     companion object {
 
         @Throws(SQLException::class)
-        fun createUser(connection: Connection, user: String?, friendsGroupId: Long?) {
+        fun createUser(connection: Connection, user: String, friendsGroupId: Long) {
             val psUser = connection.prepareStatement("INSERT INTO user (name, friends_group_id) VALUES (?,?)")
             psUser.setString(1, user)
-            psUser.setLong(2, friendsGroupId!!)
+            psUser.setLong(2, friendsGroupId)
             psUser.execute()
         }
 
@@ -24,28 +25,27 @@ class TestsPersistenceHelper {
         @Throws(SQLException::class)
         fun createExpent(
             connection: Connection,
-            owner: Long?,
-            friendsGroupId: Long?,
-            amount: Double?,
-            detail: String?
+            owner: Long,
+            friendsGroupId: Long,
+            amount: Double,
+            detail: String
         ) {
             val ps = connection.prepareStatement(
                 "INSERT INTO shared_expenses " +
                         "(friends_group_id, owner, amount, detail, status, date) VALUES (?,?,?,?,?,?)"
             )
-            ps.setLong(1, friendsGroupId!!)
-            ps.setLong(2, owner!!)
-            ps.setDouble(3, amount!!)
+            ps.setLong(1, friendsGroupId)
+            ps.setLong(2, owner)
+            ps.setDouble(3, amount)
             ps.setString(4, detail)
-            ps.setString(5, ExpentStatus.OPEN.name)
-            ps.setDate(6, Date(System.currentTimeMillis()))
+            ps.setString(5, OPEN.name)
+            ps.setDate(6, Date(currentTimeMillis()))
             ps.execute()
         }
 
         @Throws(SQLException::class)
         fun getFriendsGroupId(connection: Connection, group: String): Long {
-            val results =
-                connection.createStatement().executeQuery("select id from friends_group where name = '$group'")
+            val results = connection.createStatement().executeQuery("select id from friends_group where name = '$group'")
             results.next()
             return results.getString("id").toLong()
         }
