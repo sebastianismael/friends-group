@@ -25,7 +25,7 @@ public class FriendsGroupServiceTest {
     public static final String FRIEND_1 = "friend_1";
     public static final String FRIEND_2 = "friend_2";
     public static final String FRIEND_3 = "friend_3";
-    private FriendsGroupServiceImpl friendsGroupService;
+    private FriendsGroupService friendsGroupService;
     private final String USER = "user_18989";
     private final String FRIEND = "friend";
     private UserRepository userRepository;
