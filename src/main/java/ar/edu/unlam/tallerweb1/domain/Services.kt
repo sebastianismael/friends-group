@@ -7,7 +7,7 @@ import ar.edu.unlam.tallerweb1.domain.Repositories.Companion.getUserRepository
 
 class Services {
     companion object {
-        fun getFriendsGroupService() = FriendsGroupService(
+        fun getFriendsGroupService() = FriendsGroupServiceImpl(
             getUserRepository(),
             getFriendsGroupRepository(),
             getSharedExpensesRepository(),

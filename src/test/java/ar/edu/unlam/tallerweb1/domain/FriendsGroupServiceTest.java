@@ -25,7 +25,7 @@ public class FriendsGroupServiceTest {
     public static final String FRIEND_1 = "friend_1";
     public static final String FRIEND_2 = "friend_2";
     public static final String FRIEND_3 = "friend_3";
-    private FriendsGroupService friendsGroupService;
+    private FriendsGroupServiceImpl friendsGroupService;
     private final String USER = "user_18989";
     private final String FRIEND = "friend";
     private UserRepository userRepository;
@@ -39,7 +39,7 @@ public class FriendsGroupServiceTest {
         friendsGroupRepository = mock(FriendsGroupRepository.class);
         sharedExpensesRepository = mock(SharedExpensesRepository.class);
         paymentRepository = mock(PaymentRepository.class);
-        friendsGroupService = new FriendsGroupService(
+        friendsGroupService = new FriendsGroupServiceImpl(
                 userRepository,
                 friendsGroupRepository,
                 sharedExpensesRepository,
@@ -163,6 +163,7 @@ public class FriendsGroupServiceTest {
 
     @Test
     public void addExpentShouldPersistANewOne(){
+        givenUserWithFriensGroup(USER);
         whenAddExpentToAGroup(USER, DETAIL, AMOUNT);
         thenExpentIsSaved();
     }

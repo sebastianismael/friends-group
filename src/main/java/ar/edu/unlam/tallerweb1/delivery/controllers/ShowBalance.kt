@@ -6,10 +6,10 @@ import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.CLOSE_DIV
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.EURO
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.NO_EXPENSES
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.TAB
-import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.FriendsGroupServiceImpl
 import javax.servlet.http.HttpServletRequest
 
-class ShowBalance(private val friendsGroupService: FriendsGroupService) : Controller {
+class ShowBalance(private val friendsGroupService: FriendsGroupServiceImpl) : Controller {
     override fun invoke(request: HttpServletRequest): String {
         val user = request.getParameter("user")
         val balance = friendsGroupService.getBalance(user)
