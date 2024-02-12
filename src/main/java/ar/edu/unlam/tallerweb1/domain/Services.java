@@ -1,14 +1,12 @@
 package ar.edu.unlam.tallerweb1.domain;
 
-import static ar.edu.unlam.tallerweb1.domain.Repositories.*;
-
 public class Services {
 
     public static FriendsGroupService getFriendsGroupService() {
         return new FriendsGroupService(
-                getUserRepository(),
-                getFriendsGroupRepository(),
-                getSharedExpensesRepository(),
-                getPaymentRepository());
+                Repositories.Companion.getUserRepository(),
+                Repositories.Companion.getFriendsGroupRepository(),
+                Repositories.Companion.getSharedExpensesRepository(),
+                Repositories.Companion.getPaymentRepository());
     }
 }
