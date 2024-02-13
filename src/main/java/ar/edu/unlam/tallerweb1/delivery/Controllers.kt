@@ -29,14 +29,12 @@ class Controllers {
             controllers["/api/balance"] = ApiShowBalance(getFriendsGroupService())
         }
 
-        fun resolve(path: String)= getControllerFo(path).takeUnless { it == null } ?: throw Exception()
+        fun resolve(path: String)= getControllerFor(path).takeUnless { it == null } ?: throw Exception()
 
-        private fun getControllerFo(path: String): Controller? {
-            if (path.startsWith("/sitio-1.0")) { // TODO esto es un hack, buscar una forma de hacerlo bien
-                return controllers[path.replace("/sitio-1.0", "")]
-            }
-            return controllers[path]
-        }
+        private fun getControllerFor(path: String) =
+            if (path.startsWith("/sitio-1.0")) // TODO esto es un hack, buscar una forma de hacerlo bien
+                controllers[path.replace("/sitio-1.0", "")]
+            else controllers[path]
 
     }
 
