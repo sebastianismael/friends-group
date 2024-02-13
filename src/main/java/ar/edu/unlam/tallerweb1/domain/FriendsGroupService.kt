@@ -24,7 +24,7 @@ class FriendsGroupServiceImpl (
         if (!user.hasFriendGroup()) throw UserWithoutFriendsGroup(username)
 
         val friend = User(newFriendName)
-        friend.friendsGroup = FriendsGroup(user.friendsGroup?.id, "")
+        friend.friendsGroup = FriendsGroup(user.friendsGroup?.id!!, "")
         userRepository.saveWithFriendGroup(friend)
     }
 
@@ -76,7 +76,7 @@ class FriendsGroupServiceImpl (
     private fun getPaymentsOf(expent: SharedExpent) = paymentRepository.findPaymentsOf(expent.id!!)
 
     private fun getFriendsOf(theUser: User) =
-        friendsGroupRepository.getMembers(FriendsGroup(theUser.friendsGroup?.id, ""))
+        friendsGroupRepository.getMembers(FriendsGroup(theUser.friendsGroup?.id!!, ""))
 
     private fun updateRestOfFriendsBalance(
         members: List<User>,
