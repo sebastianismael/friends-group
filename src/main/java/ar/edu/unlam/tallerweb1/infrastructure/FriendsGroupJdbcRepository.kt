@@ -4,10 +4,8 @@ import ar.edu.unlam.tallerweb1.domain.FriendsGroupRepository
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.*
 import java.sql.Connection
-import java.util.*
 
 class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource), FriendsGroupRepository {
     override fun getMembers(group: FriendsGroup): List<User> {
@@ -27,7 +25,7 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
     }
 
     override fun getGroupOf(user: User): FriendsGroup? {
-        return findInTransaction<FriendsGroup>(
+        return findInTransaction(
             { connection: Connection, username: String ->
                 val ps = prepareStatement(connection, "select friends_group_id from user where name = ?")
                 setString(1, username, ps)

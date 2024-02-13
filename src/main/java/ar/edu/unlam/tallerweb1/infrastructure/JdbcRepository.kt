@@ -10,9 +10,9 @@ abstract class JdbcRepository(private val dataSource: DataSource) {
     private val logger: Logger = getLogger(JdbcRepository::class.java)
 
     @Throws(RuntimeException::class)
-    protected fun <T> searchInTransaction(function: (Connection, String) -> List<T>, inputVlue: String):  List<T> {
+    protected fun <T> searchInTransaction(function: (Connection, String) -> List<T>, inputValue: String):  List<T> {
         try{
-            return function(dataSource.getConnection(), inputVlue)
+            return function(dataSource.getConnection(), inputValue)
         } catch(e: SQLException) {
             logger.error(e.message, e)
             throw RuntimeException(e);
