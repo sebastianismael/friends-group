@@ -21,7 +21,8 @@ class WebAppDispatcherServlet : HttpServlet() {
 
     @Throws(IOException::class)
     private fun doAction(request: HttpServletRequest, response: HttpServletResponse) = try {
-        val results = resolve(request.requestURI)!!.invoke(request).toString()
+        val controller = resolve(request.requestURI)
+        val results = controller(request).toString()
         doResponse(response, results)
     } catch (e: BusinessException) {
         logger.error(e.message, e)

@@ -5,8 +5,8 @@ import ar.edu.unlam.tallerweb1.delivery.api.ApiShowBalance
 import ar.edu.unlam.tallerweb1.delivery.controllers.*
 import ar.edu.unlam.tallerweb1.delivery.util.CleanData
 import ar.edu.unlam.tallerweb1.delivery.util.LoadData
-import ar.edu.unlam.tallerweb1.domain.Repositories.Companion.getSharedExpensesRepository
-import ar.edu.unlam.tallerweb1.domain.Services.Companion.getFriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
+import ar.edu.unlam.tallerweb1.domain.Services.getFriendsGroupService
 
 class Controllers {
     companion object {

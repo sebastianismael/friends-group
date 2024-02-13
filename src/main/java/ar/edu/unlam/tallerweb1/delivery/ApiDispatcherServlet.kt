@@ -4,7 +4,7 @@ import ar.edu.unlam.tallerweb1.delivery.Controllers.Companion.resolve
 import ar.edu.unlam.tallerweb1.domain.exceptions.BusinessException
 import com.google.gson.Gson
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.slf4j.LoggerFactory.getLogger
 import java.io.IOException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
 
 class ApiDispatcherServlet : HttpServlet() {
-    private val logger: Logger = LoggerFactory.getLogger(ApiDispatcherServlet::class.java)
+    private val logger: Logger = getLogger(ApiDispatcherServlet::class.java)
     private val parser = Gson()
 
     @Throws(IOException::class)
@@ -24,7 +24,8 @@ class ApiDispatcherServlet : HttpServlet() {
     @Throws(IOException::class)
     private fun doAction(request: HttpServletRequest, response: HttpServletResponse) {
         try {
-            val json = parser.toJson(resolve(request.requestURI)!!.invoke(request))
+            val controller = resolve(request.requestURI)
+            val json = parser.toJson(controller(request))
             doResponse(response, json)
         } catch (e: BusinessException) {
             logger.error(e.message, e)

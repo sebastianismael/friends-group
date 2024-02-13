@@ -15,6 +15,5 @@ class User {
     constructor(name: String) {
         this.name = name
     }
-
     fun hasFriendGroup() = this.friendsGroup != null
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime.now
 import javax.servlet.http.HttpServletRequest
 
 class ApiListSharedExpenses(private val sharedExpensesRepository: SharedExpensesRepository) : Controller {
-    override fun invoke(request: HttpServletRequest): Any {
+    override operator fun invoke(request: HttpServletRequest): Any {
         val user = request.getParameter("user")
         return sharedExpensesRepository.findBy(user).map { SharedExpentDto(it) }
     }
