@@ -22,9 +22,8 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
                 val ps = prepareStatement(connection, sql)
                 setLong(1, groupId.toLong(), ps)
                 val users = executeQuery(ps)
-                while (next(users)) {
+                while (next(users))
                     found.add(User(getLong("id", users), getString("name", users)))
-                }
                 found
             },
             group.id.toString())

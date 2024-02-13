@@ -46,10 +46,10 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
             val ps = prepareStatement(connection, sql)
             setLong(1, sharedExpent.friendsGroup?.id!!, ps)
             setLong(2, sharedExpent.owner.id!!, ps)
-            setDouble(3, sharedExpent.amount!!, ps)
+            setDouble(3, sharedExpent.amount, ps)
             setString(4, sharedExpent.detail!!, ps)
             setString(5, ExpentStatus.OPEN.name, ps)
-            setDate(6, sharedExpent.date!!, ps)
+            setDate(6, sharedExpent.date, ps)
             execute(ps)
         }
     }

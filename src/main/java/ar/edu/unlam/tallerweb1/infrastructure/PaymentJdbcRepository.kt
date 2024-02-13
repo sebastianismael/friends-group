@@ -28,9 +28,8 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
                 val ps = prepareStatement(connection, sql)
                 setLong(1, expentId, ps)
                 val rs = executeQuery(ps)
-                while (next(rs)) {
+                while (next(rs))
                     found.add(buildPayment(connection, expent, rs))
-                }
                 found
             },
             expentId.toString())
@@ -48,7 +47,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
         val ps = prepareStatement(connection, "select * from shared_expenses where id = ?")
         setLong(1, expentId, ps)
         val rs = executeQuery(ps)
-        if (next(rs)) {
+        if (next(rs))
             return SharedExpent(
                 expentId,
                 getUser(connection, getLong("owner", rs)),
@@ -56,7 +55,6 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
                 getString("detail", rs),
                 getDate("date", rs), null // TODO binding del grupo de amigos
             )
-        }
         throw RuntimeException()
     }
 
