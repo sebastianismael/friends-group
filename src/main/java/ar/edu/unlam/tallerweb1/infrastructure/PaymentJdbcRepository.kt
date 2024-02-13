@@ -5,7 +5,14 @@ import ar.edu.unlam.tallerweb1.domain.model.Payment
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.*
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.executeQuery
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getDate
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getDouble
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
 import java.sql.Connection
 import java.sql.ResultSet
 

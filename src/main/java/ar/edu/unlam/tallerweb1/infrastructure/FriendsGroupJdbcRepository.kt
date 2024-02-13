@@ -4,7 +4,13 @@ import ar.edu.unlam.tallerweb1.domain.FriendsGroupRepository
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.*
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.executeQuery
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
 import java.sql.Connection
 
 class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource), FriendsGroupRepository {
