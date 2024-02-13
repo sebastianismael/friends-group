@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.delivery.controllers
 
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.NO_EXPENSES
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NO_EXPENSES
 import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
@@ -19,8 +19,8 @@ class ListSharedExpensesTest {
     private lateinit var controller: ListSharedExpenses
     private lateinit var repository: SharedExpensesRepository
     private lateinit var request: HttpServletRequest
-
     private val group = FriendsGroup(1L, "a")
+    private val USER = "user_1"
 
     @BeforeEach
     fun init() {
@@ -79,9 +79,5 @@ class ListSharedExpensesTest {
 
     private fun thenThereIsNotExpenses(expenses: String) {
         assertThat(expenses).isEqualTo(NO_EXPENSES)
-    }
-
-    companion object {
-        private const val USER = "user_1"
     }
 }

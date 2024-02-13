@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.delivery
 
-class HtmlStrings {
-    companion object {
+object HtmlStrings {
         const val NO_EXPENSES = """
             Sin gastos =) 
             <h4>
@@ -26,5 +25,4 @@ class HtmlStrings {
         const val NEW_LINE = "<br>"
         const val CLOSE_DIV = "</div>"
         const val GENERIC_ERROR = "Ha ocurrido un error inesperado. Reintente mas tarde =("
-    }
 }

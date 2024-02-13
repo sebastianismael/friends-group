@@ -1,9 +1,8 @@
 package ar.edu.unlam.tallerweb1.delivery.controllers
 
 import ar.edu.unlam.tallerweb1.delivery.Controller
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.FRIEND_ADDED
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.FRIEND_ADDED
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
-import ar.edu.unlam.tallerweb1.domain.FriendsGroupServiceImpl
 import javax.servlet.http.HttpServletRequest
 
 class AddFriend(private val friendsGroupService: FriendsGroupService) : Controller {

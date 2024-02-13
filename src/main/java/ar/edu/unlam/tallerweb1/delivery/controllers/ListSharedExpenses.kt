@@ -1,13 +1,13 @@
 package ar.edu.unlam.tallerweb1.delivery.controllers
 
 import ar.edu.unlam.tallerweb1.delivery.Controller
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.EURO
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.EXPEND_SINCE_DAYS
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.EXPEND_SINCE_MINUTES
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.EXPENSES_HEADER
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.NEW_LINE
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.NO_EXPENSES
-import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.Companion.TAB
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.EURO
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.EXPEND_SINCE_DAYS
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.EXPEND_SINCE_MINUTES
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.EXPENSES_HEADER
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NEW_LINE
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NO_EXPENSES
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.TAB
 import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import java.time.Duration.between
