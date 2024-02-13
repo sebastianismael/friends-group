@@ -3,12 +3,11 @@ package ar.edu.unlam.tallerweb1.infrastructure
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.*
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createExpent
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createGroup
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.createUser
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.getFriendsGroupId
-import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.Companion.getUserId
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.createExpent
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.createGroup
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.createUser
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.getFriendsGroupId
+import ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.getUserId
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.SQLException

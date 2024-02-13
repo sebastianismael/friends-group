@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest
 import org.mockito.kotlin.*
 
 class AddFriendTest {
-    private lateinit  var request: HttpServletRequest
+    private val USER = "user_1"
+    private val FRIEND = "friend"
     private lateinit var controller: AddFriend
+    private lateinit  var request: HttpServletRequest
     private lateinit var friendsGroupService: FriendsGroupService
 
     @BeforeEach
@@ -32,9 +34,4 @@ class AddFriendTest {
 
     private fun thenAddFriendToGroup(friend: String) =
         verify(friendsGroupService, times(1)).addFriendsToGroup(USER, friend)
-
-    companion object {
-        private const val USER = "user_1"
-        private const val FRIEND = "friend"
-    }
 }

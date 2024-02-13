@@ -86,12 +86,10 @@ class LoadData : Controller {
         return results.getString("id").toLong()
     }
 
-    companion object {
-        @Throws(SQLException::class)
-        fun getUserId(connection: Connection, user: String): Long {
-            val results = connection.createStatement().executeQuery("select id from user where name = '$user'")
-            results.next()
-            return results.getString("id").toLong()
-        }
+    @Throws(SQLException::class)
+    fun getUserId(connection: Connection, user: String): Long {
+        val results = connection.createStatement().executeQuery("select id from user where name = '$user'")
+        results.next()
+        return results.getString("id").toLong()
     }
 }

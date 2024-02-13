@@ -20,8 +20,8 @@ class ApiListSharedExpensesTest {
     private lateinit var controller: ApiListSharedExpenses
     private lateinit var repository: SharedExpensesRepository
     private lateinit var request: HttpServletRequest
-
     private val group = FriendsGroup(1L, "a")
+    private val USER = "user_1"
 
     @BeforeEach
     fun init() {
@@ -80,9 +80,5 @@ class ApiListSharedExpensesTest {
 
     private fun thenThereIsNotExpenses(expenses: List<SharedExpent>) {
         assertThat(expenses).isEmpty()
-    }
-
-    companion object {
-        private const val USER = "user_1"
     }
 }

@@ -47,7 +47,5 @@ class ListSharedExpenses(private val sharedExpensesRepository: SharedExpensesRep
     private fun daysBeforeToday(date: LocalDateTime) = between(date, now()).toDays()
     private fun formatDays(days: Long) = String.format(EXPEND_SINCE_DAYS, days)
     private fun formatMinutes(date: LocalDateTime) = String.format(EXPEND_SINCE_MINUTES, between(date, now()).toMinutes())
-    companion object {
-        private fun header(user: String) = String.format(EXPENSES_HEADER, user, user, user)
-    }
+    private fun header(user: String) = String.format(EXPENSES_HEADER, user, user, user)
 }

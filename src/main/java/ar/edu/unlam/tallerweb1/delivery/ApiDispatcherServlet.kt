@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
 
 class ApiDispatcherServlet : HttpServlet() {
+    private val logger: Logger = LoggerFactory.getLogger(ApiDispatcherServlet::class.java)
     private val parser = Gson()
+
     @Throws(IOException::class)
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) = doAction(request, response)
 
@@ -39,9 +41,5 @@ class ApiDispatcherServlet : HttpServlet() {
         val printWriter = response.writer
         printWriter.println(json)
         printWriter.close()
-    }
-
-    companion object {
-        private val logger: Logger = LoggerFactory.getLogger(ApiDispatcherServlet::class.java)
     }
 }

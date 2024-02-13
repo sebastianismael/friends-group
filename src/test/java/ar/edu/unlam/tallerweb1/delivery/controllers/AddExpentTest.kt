@@ -12,6 +12,9 @@ class AddExpentTest {
     private lateinit var request: HttpServletRequest
     private lateinit var controller: AddExpent
     private lateinit var friendsGroupService: FriendsGroupService
+    private val USER = "user_1"
+    private val DETAIL = "Cena"
+    private val AMOUNT = "100.50"
 
     @BeforeEach
     fun init() {
@@ -60,12 +63,5 @@ class AddExpentTest {
 
     private fun thenGetErrorMessage(actual: String, expected: String) {
         assertThat(actual).isEqualTo(expected)
-    }
-
-    companion object {
-        private const val USER = "user_1"
-        private const val DETAIL = "Cena"
-
-        private const val AMOUNT = "100.50"
     }
 }
