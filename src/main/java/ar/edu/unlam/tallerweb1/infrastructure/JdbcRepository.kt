@@ -19,7 +19,7 @@ abstract class JdbcRepository(private val dataSource: DataSource) {
         }
     }
 
-    protected fun <T> findInTransaction(function: (Connection, String) -> T, inputValue: String): T {
+    protected fun <T> findInTransaction(function: (Connection, String) -> T?, inputValue: String): T?{
         try{
             return function(dataSource.getConnection(), inputValue)
         } catch(e: SQLException) {
