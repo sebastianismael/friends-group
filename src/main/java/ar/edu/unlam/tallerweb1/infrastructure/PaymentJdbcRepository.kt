@@ -36,7 +36,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
             expentId.toString())
     }
 
-    private fun buildPayment(connection: Connection, expent: SharedExpent?, payments: ResultSet) =
+    private fun buildPayment(connection: Connection, expent: SharedExpent, payments: ResultSet) =
         Payment(
             getLong("id", payments),
             getUser(connection, getLong("payer", payments)),
@@ -44,13 +44,12 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
             expent
         )
 
-    private fun getExpent(connection: Connection, expentId: Long): SharedExpent? {
+    private fun getExpent(connection: Connection, expentId: Long): SharedExpent {
         val ps = prepareStatement(connection, "select * from shared_expenses where id = ?")
         setLong(1, expentId, ps)
         val rs = executeQuery(ps)
-        var expent: SharedExpent? = null
         if (next(rs)) {
-            expent = SharedExpent(
+            return SharedExpent(
                 expentId,
                 getUser(connection, getLong("owner", rs)),
                 getDouble("amount", rs),
@@ -58,7 +57,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
                 getDate("date", rs), null // TODO binding del grupo de amigos
             )
         }
-        return expent
+        throw RuntimeException()
     }
 
     private fun getUser(connection: Connection, payerId: Long): User {
