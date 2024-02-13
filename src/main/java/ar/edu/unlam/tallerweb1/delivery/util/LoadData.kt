@@ -64,7 +64,7 @@ class LoadData : Controller {
             "INSERT INTO shared_expenses " +
                     "(friends_group_id, owner, amount, detail, status, date) VALUES (?,?,?,?,?,?)"
         )
-        ps.setLong(1, friendsGroupId!!)
+        ps.setLong(1, friendsGroupId)
         ps.setLong(2, getUserId(connection, user))
         ps.setDouble(3, amount)
         ps.setString(4, detail)
