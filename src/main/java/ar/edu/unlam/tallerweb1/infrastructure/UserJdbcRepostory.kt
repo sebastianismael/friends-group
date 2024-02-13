@@ -28,7 +28,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
             val sql = "INSERT INTO user (name, friends_group_id) VALUES (?,?)"
             val ps = prepareStatement(connection, sql)
             setString(1, user.name, ps)
-            setLong(2, user.friendsGroup.id, ps)
+            setLong(2, user.friendsGroup?.id!!, ps)
             execute(ps)
         }
 

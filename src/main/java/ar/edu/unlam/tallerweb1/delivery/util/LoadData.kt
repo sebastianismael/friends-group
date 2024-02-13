@@ -40,10 +40,10 @@ class LoadData : Controller {
     }
 
     @Throws(SQLException::class)
-    private fun createAPayment(user: Long, amount: Double, expentId: Long) {
+    private fun createAPayment(user: Long?, amount: Double, expentId: Long) {
         val sql = "INSERT INTO payment (payer, expent_id, amount) VALUES (?,?,?)"
         val psUser = connection.prepareStatement(sql)
-        psUser.setLong(1, user)
+        psUser.setLong(1, user!!)
         psUser.setLong(2, expentId)
         psUser.setDouble(3, amount)
         psUser.execute()

@@ -18,8 +18,8 @@ class PaymentJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
     fun shouldReturnPaymentsOfExpent() {
         val friendsGroupId = givenAgroup(GROUP)
         givenAGroupUser(USER_1, friendsGroupId)
-        val user2Id = givenAGroupUser(USER_2, friendsGroupId).id
-        val user3Id = givenAGroupUser(USER_3, friendsGroupId).id
+        val user2Id = givenAGroupUser(USER_2, friendsGroupId).id!!
+        val user3Id = givenAGroupUser(USER_3, friendsGroupId).id!!
         val expentId = givenAnExpent(friendsGroupId, USER_1, 900.0, "Cena")
 
         givenAPayment(user2Id, 300.0, expentId)
