@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.delivery.controllers
 
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_AMOUNT
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_DETAIL
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -19,7 +21,7 @@ class AddExpentTest {
     @BeforeEach
     fun init() {
         request = mock()
-        whenever(request.getParameter("user")) doReturn  USER
+        whenever(request.getParameter("user"))   doReturn  USER
         whenever(request.getParameter("amount")) doReturn  AMOUNT
         whenever(request.getParameter("detail")) doReturn  DETAIL
         friendsGroupService = mock()
@@ -37,14 +39,14 @@ class AddExpentTest {
     fun shouldReturnErrorIfAmountIsNotPresent() {
         givenAmountIsNotPresent()
         val response = whenAddAnExpentToFriendsGroupOf(USER)
-        thenGetErrorMessage(response, HtmlStrings.ADD_EXPENT_NO_AMOUNT)
+        thenGetErrorMessage(response, ADD_EXPENT_NO_AMOUNT)
     }
 
     @Test
     fun shouldReturnErrorIfDetailIsNotPresent() {
         givenDetailIsNotPresent()
         val response = whenAddAnExpentToFriendsGroupOf(USER)
-        thenGetErrorMessage(response, HtmlStrings.ADD_EXPENT_NO_DETAIL)
+        thenGetErrorMessage(response, ADD_EXPENT_NO_DETAIL)
     }
 
     private fun givenDetailIsNotPresent() {

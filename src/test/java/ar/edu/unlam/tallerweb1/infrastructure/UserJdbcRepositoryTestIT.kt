@@ -41,8 +41,7 @@ class UserJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
         thenCantFindIt(USER)
     }
 
-    private fun whenNotExistsTheUser(user: String) {
-    }
+    private fun whenNotExistsTheUser(user: String) {}
 
     private fun whenCreateAnUser(user: String) {
         userRepository.save(User(user))

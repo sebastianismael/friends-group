@@ -16,7 +16,7 @@ class AddFriendTest {
     @BeforeEach
     fun init() {
         request = mock()
-        whenever(request.getParameter("user")) doReturn USER
+        whenever(request.getParameter("user"))   doReturn USER
         whenever(request.getParameter("friend")) doReturn FRIEND
         friendsGroupService = mock()
         controller = AddFriend(friendsGroupService)

@@ -117,10 +117,12 @@ class FriendsGroupServiceTest {
         givenUserWithFriensGroup(USER)
         givenAGroupWith(4)
 
-        givenGroupHasAnExpents( mutableListOf(
-            SharedExpent(1L, User(USER), 120.0, "cena", now(), null),
-            SharedExpent(12L, User(FRIEND_1), 120.0, "almuerzo", now(), null)
-        ))
+        givenGroupHasAnExpents(
+            mutableListOf(
+                SharedExpent(1L, User(USER), 120.0, "cena", now(), null),
+                SharedExpent(12L, User(FRIEND_1), 120.0, "almuerzo", now(), null)
+            )
+        )
 
         val balance = whenGetBalance(USER)
 

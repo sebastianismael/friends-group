@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.infrastructure
 
 import ar.edu.unlam.tallerweb1.domain.PaymentRepository
-import ar.edu.unlam.tallerweb1.domain.model.Payment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.SQLException
@@ -44,7 +43,5 @@ class PaymentJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
         assertThat(payments).isEmpty()
     }
 
-    private fun whenGetPaymentsOf(expentId: Long): List<Payment> {
-        return paymentRepository.findPaymentsOf(expentId)
-    }
+    private fun whenGetPaymentsOf(expentId: Long) = paymentRepository.findPaymentsOf(expentId)
 }
