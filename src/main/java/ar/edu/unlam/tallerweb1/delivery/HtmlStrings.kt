@@ -25,4 +25,6 @@ object HtmlStrings {
         const val NEW_LINE = "<br>"
         const val CLOSE_DIV = "</div>"
         const val GENERIC_ERROR = "Ha ocurrido un error inesperado. Reintente mas tarde =("
+        const val GREEN = "<span style=\"color: green\">"
+        const val RED = "<span style=\"color: red\">"
 }

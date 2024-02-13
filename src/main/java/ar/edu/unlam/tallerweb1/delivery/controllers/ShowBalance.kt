@@ -4,7 +4,9 @@ import ar.edu.unlam.tallerweb1.delivery.Controller
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.BALANCE_HEADER
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.CLOSE_DIV
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.EURO
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.GREEN
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NO_EXPENSES
+import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.RED
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.TAB
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
 import javax.servlet.http.HttpServletRequest
@@ -30,10 +32,15 @@ class ShowBalance(private val friendsGroupService: FriendsGroupService) : Contro
     }
 
     private fun formatBalanceLine(sb: StringBuilder, entry: Map.Entry<String, Double>) {
-        sb.append("<p>").append(entry.key.trim { it <= ' ' }).append(TAB).append(TAB)
-        val value = entry.value
-        if (value >= 0) sb.append("<span style=\"color: green\">")
-        else sb.append("<span style=\"color: red\">")
-        sb.append(value).append(EURO).append("</span></p>")
+        sb.append("<p>")
+        sb.append(entry.key.trim())
+        sb.append(TAB).append(TAB)
+        sb.append(entry.value.format())
+        sb.append("</p>")
+    }
+
+    private fun Double.format(): String {
+        val str = if (this >= 0) GREEN else RED
+        return "$str$this$EURO</span>"
     }
 }
