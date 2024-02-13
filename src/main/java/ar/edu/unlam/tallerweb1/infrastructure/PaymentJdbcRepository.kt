@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.infrastructure
 
 import ar.edu.unlam.tallerweb1.domain.PaymentRepository
+import ar.edu.unlam.tallerweb1.domain.exceptions.UserNotExists
 import ar.edu.unlam.tallerweb1.domain.model.Payment
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
@@ -60,13 +61,12 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
         return expent
     }
 
-    private fun getUser(connection: Connection, payerId: Long): User? {
+    private fun getUser(connection: Connection, payerId: Long): User {
         val ps = prepareStatement(connection, "select name from user where id = ?")
         setLong(1, payerId, ps)
         val rs = executeQuery(ps)
-        var payer: User? = null
         if (next(rs))
-            payer = User(payerId, getString("name", rs))
-        return payer
+            return  User(payerId, getString("name", rs))
+        throw UserNotExists(payerId.toString())
     }
 }

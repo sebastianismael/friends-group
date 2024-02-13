@@ -16,7 +16,7 @@ class ApiListSharedExpenses(private val sharedExpensesRepository: SharedExpenses
 
     private inner class SharedExpentDto(expent: SharedExpent) {
         val payer: String = expent.payer
-        val detail: String = expent.detail
+        val detail: String? = expent.detail
         val minuteAgo: String
         val amount: String
 

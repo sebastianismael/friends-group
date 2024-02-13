@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.infrastructure
 
 import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
+import ar.edu.unlam.tallerweb1.domain.exceptions.UserNotExists
 import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
@@ -43,12 +44,12 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
         executeInTransaction { connection: Connection ->
             val sql = "INSERT INTO shared_expenses (friends_group_id, owner, amount, detail, status, date) VALUES (?,?,?,?,?,?)"
             val ps = prepareStatement(connection, sql)
-            setLong(1, sharedExpent.friendsGroup.id, ps)
+            setLong(1, sharedExpent.friendsGroup?.id!!, ps)
             setLong(2, sharedExpent.owner.id!!, ps)
-            setDouble(3, sharedExpent.amount, ps)
-            setString(4, sharedExpent.detail, ps)
+            setDouble(3, sharedExpent.amount!!, ps)
+            setString(4, sharedExpent.detail!!, ps)
             setString(5, ExpentStatus.OPEN.name, ps)
-            setDate(6, sharedExpent.date, ps)
+            setDate(6, sharedExpent.date!!, ps)
             execute(ps)
         }
     }
@@ -56,7 +57,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     private fun buildFriendsGroup(group: ResultSet) = FriendsGroup(getLong("friends_group_id", group), "")
     // TODO obtener el nombre grupo, ver si es necesario
 
-    private fun buildExpent(expenses: ResultSet, friendsGroup: FriendsGroup, owner: User?) =
+    private fun buildExpent(expenses: ResultSet, friendsGroup: FriendsGroup, owner: User) =
         SharedExpent(
             getLong("id", expenses),
             owner,
@@ -68,14 +69,14 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
 
     private fun exist(resultSet: ResultSet) = next(resultSet)
 
-    private fun searchOwner(connection: Connection, userId: Long): User? {
+    private fun searchOwner(connection: Connection, userId: Long): User {
         val sql = "select * from user where id = ?"
         val expensesStatement = prepareStatement(connection, sql)
         setLong(1, userId, expensesStatement)
         val users = executeQuery(expensesStatement)
         if (next(users))
             return User(getLong("id", users), getString("name", users))
-        return null
+        throw UserNotExists(userId.toString())
     }
 
     private fun searchSharedExpenses(connection: Connection, resultSet: ResultSet): ResultSet {

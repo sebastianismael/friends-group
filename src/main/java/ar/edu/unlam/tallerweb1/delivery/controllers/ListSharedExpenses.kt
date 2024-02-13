@@ -33,9 +33,9 @@ class ListSharedExpenses(private val sharedExpensesRepository: SharedExpensesRep
         return buffer.toString()
     }
 
-    private fun formatExpent(sb: StringBuilder, each: SharedExpent) {
-        sb.append(each.owner.name).append(TAB).append(each.amount).append(EURO).append(NEW_LINE)
-        sb.append(each.detail).append(TAB).append(calculateDate(each.date)).append(NEW_LINE).append(NEW_LINE)
+    private fun formatExpent(sb: StringBuilder, expent: SharedExpent) {
+        sb.append(expent.owner.name).append(TAB).append(expent.amount).append(EURO).append(NEW_LINE)
+        sb.append(expent.detail).append(TAB).append(calculateDate(expent.date)).append(NEW_LINE).append(NEW_LINE)
     }
 
     private fun calculateDate(date: LocalDateTime): String {

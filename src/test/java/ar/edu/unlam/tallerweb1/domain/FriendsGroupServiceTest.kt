@@ -166,7 +166,7 @@ class FriendsGroupServiceTest {
     }
 
     private fun givenAPayment(user: String, amount: Double, sharedExpent: SharedExpent) {
-        whenever(paymentRepository.findPaymentsOf(sharedExpent.id)) doReturn listOf(aPaymentWith(user, amount, sharedExpent))
+        whenever(paymentRepository.findPaymentsOf(sharedExpent.id!!)) doReturn listOf(aPaymentWith(user, amount, sharedExpent))
     }
 
     private fun aPaymentWith(user: String, amount: Double, sharedExpent: SharedExpent) =

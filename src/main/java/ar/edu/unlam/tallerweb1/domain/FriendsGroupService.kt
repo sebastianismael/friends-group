@@ -73,7 +73,7 @@ class FriendsGroupServiceImpl (
 
     private fun findExistingUser(username: String) = userRepository.findByName(username) ?: throw UserNotExists(username)
 
-    private fun getPaymentsOf(expent: SharedExpent) = paymentRepository.findPaymentsOf(expent.id)
+    private fun getPaymentsOf(expent: SharedExpent) = paymentRepository.findPaymentsOf(expent.id!!)
 
     private fun getFriendsOf(theUser: User) =
         friendsGroupRepository.getMembers(FriendsGroup(theUser.friendsGroup?.id, ""))
