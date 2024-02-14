@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.infrastructure
 import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.exceptions.UserNotExists
 import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus
+import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus.OPEN
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
@@ -48,7 +49,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
             setLong(2, sharedExpent.owner.id!!, ps)
             setDouble(3, sharedExpent.amount, ps)
             setString(4, sharedExpent.detail!!, ps)
-            setString(5, ExpentStatus.OPEN.name, ps)
+            setString(5, OPEN.name, ps)
             setDate(6, sharedExpent.date, ps)
             execute(ps)
         }
@@ -80,7 +81,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     }
 
     private fun searchSharedExpenses(connection: Connection, resultSet: ResultSet): ResultSet {
-        val sql = "select * from shared_expenses where friends_group_id = ? and status = '${ExpentStatus.OPEN}' order by date desc"
+        val sql = "select * from shared_expenses where friends_group_id = ? and status = '$OPEN' order by date desc"
         val expensesStatement = prepareStatement(connection, sql)
         setLong(1, getLong("friends_group_id", resultSet), expensesStatement)
         return executeQuery(expensesStatement)
