@@ -71,7 +71,7 @@ class ListSharedExpensesTest {
         whenever(repository.findBy(user)) doReturn listOf()
     }
 
-    private fun whenGetSharedExpensesOfGroupWithUser(user: String): String = controller.invoke(request)
+    private fun whenGetSharedExpensesOfGroupWithUser(user: String): String = controller(request)
 
     private fun thenThereAreExpenses(expenses: String) {
         assertThat(expenses).isNotEqualTo(NO_EXPENSES)

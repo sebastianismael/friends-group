@@ -72,7 +72,7 @@ class ApiListSharedExpensesTest {
         whenever(repository.findBy(user)) doReturn listOf()
     }
 
-    private fun whenGetSharedExpensesOfGroupWithUser(user: String) = controller.invoke(request) as List<SharedExpent>
+    private fun whenGetSharedExpensesOfGroupWithUser(user: String) = controller(request) as List<SharedExpent>
 
     private fun thenThereAreExpenses(expenses: List<SharedExpent>) {
         assertThat(expenses).hasSize(2)
