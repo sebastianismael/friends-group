@@ -80,7 +80,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     }
 
     private fun searchSharedExpenses(connection: Connection, resultSet: ResultSet): ResultSet {
-        val sql = "select * from shared_expenses where friends_group_id = ? and status = 'OPEN' order by date desc"
+        val sql = "select * from shared_expenses where friends_group_id = ? and status = '${ExpentStatus.OPEN}' order by date desc"
         val expensesStatement = prepareStatement(connection, sql)
         setLong(1, getLong("friends_group_id", resultSet), expensesStatement)
         return executeQuery(expensesStatement)
