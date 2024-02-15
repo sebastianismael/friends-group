@@ -53,7 +53,8 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
                 getUser(connection, getLong("owner", rs)),
                 getDouble("amount", rs),
                 getString("detail", rs),
-                getDate("date", rs), null // TODO binding del grupo de amigos
+                getDate("date", rs),
+        null // TODO binding del grupo de amigos
             )
         throw RuntimeException()
     }
