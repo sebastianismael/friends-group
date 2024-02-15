@@ -3,8 +3,8 @@ package ar.edu.unlam.tallerweb1.delivery.controllers
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import javax.servlet.http.HttpServletRequest
 import org.mockito.kotlin.*
+import javax.servlet.http.HttpServletRequest
 
 class AddFriendTest {
     private val USER = "user_1"

@@ -1,7 +1,10 @@
 package ar.edu.unlam.tallerweb1.infrastructure.utils
 
-import java.sql.*
+import java.sql.Connection
 import java.sql.Date.valueOf
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
 import java.time.LocalDateTime
 
 object JdbcUtil {

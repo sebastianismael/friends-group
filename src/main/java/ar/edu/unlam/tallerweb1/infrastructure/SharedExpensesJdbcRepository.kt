@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.infrastructure
 
 import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.exceptions.UserNotExists
-import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus
 import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus.OPEN
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
