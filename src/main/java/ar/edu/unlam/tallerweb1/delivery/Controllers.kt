@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.delivery.api.ApiListSharedExpenses
 import ar.edu.unlam.tallerweb1.delivery.api.ApiShowBalance
 import ar.edu.unlam.tallerweb1.delivery.controllers.*
 import ar.edu.unlam.tallerweb1.delivery.util.CleanData
+import ar.edu.unlam.tallerweb1.delivery.util.CreateSchema
 import ar.edu.unlam.tallerweb1.delivery.util.LoadData
 import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.Services.getFriendsGroupService
@@ -14,6 +15,7 @@ class Controllers {
 
         // TODO agregar manejo de HTTP methods
         init {
+            controllers["/"] = Index()
             controllers["/list-expenses"] = ListSharedExpenses(getSharedExpensesRepository())
             controllers["/goto-add-friend"] = GoToAddFriend()
             controllers["/add-friend"] = AddFriend(getFriendsGroupService())
@@ -24,6 +26,7 @@ class Controllers {
             controllers["/alive"] = Alive()
             controllers["/load-data"] = LoadData()
             controllers["/clean-data"] = CleanData()
+            controllers["/create-schema"] = CreateSchema()
 
             controllers["/api/list-expenses"] = ApiListSharedExpenses(getSharedExpensesRepository())
             controllers["/api/balance"] = ApiShowBalance(getFriendsGroupService())
