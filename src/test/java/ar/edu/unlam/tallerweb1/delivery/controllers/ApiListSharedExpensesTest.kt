@@ -64,21 +64,14 @@ class ApiListSharedExpensesTest {
                 group
             )
         )
-
         whenever(repository.findBy(user)) doReturn list
     }
 
-    private fun givenThereIsNotExpensesForGroupOf(user: String) {
-        whenever(repository.findBy(user)) doReturn listOf()
-    }
+    private fun givenThereIsNotExpensesForGroupOf(user: String) = whenever(repository.findBy(user)) doReturn listOf()
 
     private fun whenGetSharedExpensesOfGroupWithUser(user: String) = controller(request) as List<SharedExpent>
 
-    private fun thenThereAreExpenses(expenses: List<SharedExpent>) {
-        assertThat(expenses).hasSize(2)
-    }
+    private fun thenThereAreExpenses(expenses: List<SharedExpent>) = assertThat(expenses).hasSize(2)
 
-    private fun thenThereIsNotExpenses(expenses: List<SharedExpent>) {
-        assertThat(expenses).isEmpty()
-    }
+    private fun thenThereIsNotExpenses(expenses: List<SharedExpent>) = assertThat(expenses).isEmpty()
 }

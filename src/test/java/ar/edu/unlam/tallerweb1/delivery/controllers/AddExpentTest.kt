@@ -48,21 +48,14 @@ class AddExpentTest {
         thenGetErrorMessage(response, ADD_EXPENT_NO_DETAIL)
     }
 
-    private fun givenDetailIsNotPresent() {
-        whenever(request.getParameter("detail")) doReturn ""
-    }
+    private fun givenDetailIsNotPresent() = whenever(request.getParameter("detail")) doReturn ""
 
-    private fun givenAmountIsNotPresent() {
-        whenever(request.getParameter("amount")) doReturn ""
-    }
+    private fun givenAmountIsNotPresent() = whenever(request.getParameter("amount")) doReturn ""
 
     private fun whenAddAnExpentToFriendsGroupOf(user: String) = controller(request)
 
-    private fun thenAddExpentToGroup(detail: String, amount: String) {
+    private fun thenAddExpentToGroup(detail: String, amount: String) =
         verify(friendsGroupService, times(1)).addExpentToGroup(USER, detail, amount.toDouble())
-    }
 
-    private fun thenGetErrorMessage(actual: String, expected: String) {
-        assertThat(actual).isEqualTo(expected)
-    }
+    private fun thenGetErrorMessage(actual: String, expected: String) = assertThat(actual).isEqualTo(expected)
 }

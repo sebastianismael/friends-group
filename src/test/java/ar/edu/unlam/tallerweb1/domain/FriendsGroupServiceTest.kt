@@ -159,32 +159,24 @@ class FriendsGroupServiceTest {
         thenExpentIsSaved()
     }
 
-    private fun thenExpentIsSaved() {
-        verify(sharedExpensesRepository, times(1)).save(any())
-    }
+    private fun thenExpentIsSaved() = verify(sharedExpensesRepository, times(1)).save(any())
 
-    private fun whenAddExpentToAGroup(user: String, detail: String, amount: Double) {
+    private fun whenAddExpentToAGroup(user: String, detail: String, amount: Double) =
         friendsGroupService.addExpentToGroup(user, detail, amount)
-    }
 
-    private fun givenAPayment(user: String, amount: Double, sharedExpent: SharedExpent) {
+    private fun givenAPayment(user: String, amount: Double, sharedExpent: SharedExpent) =
         whenever(paymentRepository.findPaymentsOf(sharedExpent.id!!)) doReturn listOf(aPaymentWith(user, amount, sharedExpent))
-    }
 
     private fun aPaymentWith(user: String, amount: Double, sharedExpent: SharedExpent) =
         Payment(1L, User(user), amount, sharedExpent)
 
-    private fun givenGroupHasNotExpenses() {
-        whenever(sharedExpensesRepository.findBy(any())) doReturn listOf()
-    }
+    private fun givenGroupHasNotExpenses() = whenever(sharedExpensesRepository.findBy(any())) doReturn listOf()
 
-    private fun givenGroupHasAnExpents(id: Long, payer: String, amount: Double) {
+    private fun givenGroupHasAnExpents(id: Long, payer: String, amount: Double) =
         whenever(sharedExpensesRepository.findBy(payer)) doReturn listOf(aSharedExpentWith(id, payer, amount))
-    }
 
-    private fun givenGroupHasAnExpents(expenses: List<SharedExpent>) {
+    private fun givenGroupHasAnExpents(expenses: List<SharedExpent>) =
         whenever(sharedExpensesRepository.findBy(any<String>())) doReturn expenses
-    }
 
     private fun givenAGroupWith(friendsNumber: Int) {
         val friends = mutableListOf<User>()
@@ -208,34 +200,23 @@ class FriendsGroupServiceTest {
         whenever(userRepository.findByName(user)) doReturn friend
     }
 
-    private fun givenUserWithoutFriensGroup(user: String) {
+    private fun givenUserWithoutFriensGroup(user: String) =
         whenever(userRepository.findByName(user)) doReturn User(1L, "bad guy")
-    }
 
-    private fun givenNotExistsUser(user: String) {
-        whenever(userRepository.findByName(user)) doReturn null
-    }
+    private fun givenNotExistsUser(user: String) = whenever(userRepository.findByName(user)) doReturn null
 
-    private fun whenAddFriend(user: String, friend: String) {
-        friendsGroupService.addFriendsToGroup(user, friend)
-    }
+    private fun whenAddFriend(user: String, friend: String) = friendsGroupService.addFriendsToGroup(user, friend)
 
     private fun whenGetBalance(user: String): Map<String, Double> = friendsGroupService.getBalance(user)
 
-    private fun thenFriendIsAdded() {
-        verify(userRepository, times(1)).saveWithFriendGroup(any())
-    }
+    private fun thenFriendIsAdded() = verify(userRepository, times(1)).saveWithFriendGroup(any())
 
-    private fun thenTheBalanceIsEmpty(balance: Map<String, Double>) {
-        assertThat(balance).isEmpty()
-    }
+    private fun thenTheBalanceIsEmpty(balance: Map<String, Double>) = assertThat(balance).isEmpty()
 
-    private fun thenBalanceShouldHasALineFor(user: String, amount: Double, balance: Map<String, Double>) {
+    private fun thenBalanceShouldHasALineFor(user: String, amount: Double, balance: Map<String, Double>) =
         assertThat(balance[user]).isEqualTo(amount)
-    }
 
-    private fun aSharedExpentWith(id: Long, payer: String, amount: Double): SharedExpent =
+    private fun aSharedExpentWith(id: Long, payer: String, amount: Double) =
         SharedExpent(id, User(payer), amount, "detail", now(), FriendsGroup(1L, ""))
-
 
 }

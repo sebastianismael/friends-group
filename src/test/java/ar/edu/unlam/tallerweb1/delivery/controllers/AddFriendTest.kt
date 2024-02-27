@@ -28,9 +28,7 @@ class AddFriendTest {
         thenAddFriendToGroup(FRIEND)
     }
 
-    private fun whenAddFriendToFriendsGroupOf(user: String, friend: String) {
-        controller(request)
-    }
+    private fun whenAddFriendToFriendsGroupOf(user: String, friend: String) = controller(request)
 
     private fun thenAddFriendToGroup(friend: String) =
         verify(friendsGroupService, times(1)).addFriendsToGroup(USER, friend)

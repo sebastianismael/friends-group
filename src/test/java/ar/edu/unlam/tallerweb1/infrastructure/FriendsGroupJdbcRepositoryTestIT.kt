@@ -66,15 +66,9 @@ class FriendsGroupJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
 
     private fun whenSearchGroupOf(user: String) = friendsGroupRepository.getGroupOf(User(user))!!
 
-    private fun thenGroupHasNotMemebers(members: List<User>) {
-        assertThat(members).isEmpty()
-    }
+    private fun thenGroupHasNotMemebers(members: List<User>) = assertThat(members).isEmpty()
 
-    private fun thenGetGroup(expected: String, group: FriendsGroup) {
-        assertThat(group.name).isEqualTo(expected)
-    }
+    private fun thenGetGroup(expected: String, group: FriendsGroup) = assertThat(group.name).isEqualTo(expected)
 
-    private fun thenGroupHasThreeMemebers(members: List<User>) {
-        assertThat(members).hasSize(3)
-    }
+    private fun thenGroupHasThreeMemebers(members: List<User>) = assertThat(members).hasSize(3)
 }
