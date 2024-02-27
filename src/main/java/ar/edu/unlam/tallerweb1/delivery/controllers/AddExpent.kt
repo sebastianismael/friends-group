@@ -23,5 +23,5 @@ class AddExpent(private val friendsGroupService: FriendsGroupService) : Controll
         return ADD_EXPENT_SUCCESS
     }
 
-    private fun isNotValid(amountParam: String) = isEmpty(amountParam) || isBlank(amountParam)
+    private fun isNotValid(parameter: String) = isEmpty(parameter) || isBlank(parameter)
 }
