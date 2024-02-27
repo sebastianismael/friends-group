@@ -16,9 +16,8 @@ object TestsPersistenceHelper {
     }
 
     @Throws(SQLException::class)
-    fun createGroup(connection: Connection, group: String) {
+    fun createGroup(connection: Connection, group: String) =
         connection.createStatement().execute("INSERT INTO friends_group (name) VALUES ('$group')")
-    }
 
     @Throws(SQLException::class)
     fun createExpent(

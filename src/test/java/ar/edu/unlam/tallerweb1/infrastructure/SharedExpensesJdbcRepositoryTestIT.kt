@@ -92,15 +92,9 @@ class SharedExpensesJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
 
     private fun getExpentBy(user: String) = repository.findBy(user)
 
-    private fun thenGetThreeExpenses(sharedExpenses: List<SharedExpent>) {
-        assertThat(sharedExpenses).hasSize(3)
-    }
+    private fun thenGetThreeExpenses(sharedExpenses: List<SharedExpent>) = assertThat(sharedExpenses).hasSize(3)
 
-    private fun thenNotGetExpenses(sharedExpenses: List<SharedExpent>) {
-        assertThat(sharedExpenses).isEmpty()
-    }
+    private fun thenNotGetExpenses(sharedExpenses: List<SharedExpent>) = assertThat(sharedExpenses).isEmpty()
 
-    private fun thenThereIsOneExpentInGroupOf(user: String) {
-        assertThat(getExpentBy(user)).hasSize(1)
-    }
+    private fun thenThereIsOneExpentInGroupOf(user: String) = assertThat(getExpentBy(user)).hasSize(1)
 }

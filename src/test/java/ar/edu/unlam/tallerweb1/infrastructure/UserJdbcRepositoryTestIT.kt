@@ -43,13 +43,9 @@ class UserJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
 
     private fun whenNotExistsTheUser(user: String) {}
 
-    private fun whenCreateAnUser(user: String) {
-        userRepository.save(User(user))
-    }
+    private fun whenCreateAnUser(user: String) = userRepository.save(User(user))
 
-    private fun thenCantFindIt(user: String) {
-        assertThat(userRepository.findByName(user)).isNull()
-    }
+    private fun thenCantFindIt(user: String) = assertThat(userRepository.findByName(user)).isNull()
 
     private fun thenCanFindItAndHasAFriendsGroup(user: String) {
         val found = userRepository.findByName(user)
@@ -57,7 +53,5 @@ class UserJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
         assertThat(found!!.friendsGroup).isNotNull()
     }
 
-    private fun thenCanFindIt(user: String) {
-        assertThat(userRepository.findByName(user)).isNotNull()
-    }
+    private fun thenCanFindIt(user: String) = assertThat(userRepository.findByName(user)).isNotNull()
 }
