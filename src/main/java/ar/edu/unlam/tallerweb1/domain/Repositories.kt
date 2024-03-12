@@ -28,13 +28,10 @@ object Repositories {
     //  * mejora #2: manejar los repositorios como singleton, ya que estamos instanciando el repo cada vez. DONE!!!!
     //  * mejora #3: no soporta mas de una implementacion de la interface
     private fun <T : Any> getImplementation(repository: KClass<T>, dataSource: MySqlDataSource): Any? {
-        try {
-            if(!this.implementations.contains(repository))
-                this.implementations[repository] = getSubclassOf(repository).instantiate(dataSource)
-            return this.implementations[repository]
-        } catch (e: Exception) {
-            throw RuntimeException("$repository implementation can't be instantiated: ", e)
-        }
+
+        if(!this.implementations.contains(repository))
+            this.implementations[repository] = getSubclassOf(repository).instantiate(dataSource)
+        return this.implementations[repository]
     }
 
     private fun <T : Any> getSubclassOf(repository: KClass<T>): Class<out T> {
@@ -44,9 +41,13 @@ object Repositories {
         return implementations.iterator().next()
     }
 
-    private fun <T : Any> Class<T>.instantiate(dataSource: MySqlDataSource) =
-        this.getConstructor(DataSource::class.java).newInstance(dataSource)
-
+    private fun <T : Any> Class<T>.instantiate(dataSource: MySqlDataSource): T {
+        try {
+            return this.getConstructor(DataSource::class.java).newInstance(dataSource)
+        } catch (e: Exception) {
+            throw RuntimeException("$this implementation can't be instantiated: ", e)
+        }
+    }
 }
 
 
