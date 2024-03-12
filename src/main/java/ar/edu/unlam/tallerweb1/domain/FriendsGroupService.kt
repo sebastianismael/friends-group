@@ -41,9 +41,7 @@ class FriendsGroupServiceImpl (
     override fun addExpentToGroup(username: String, detail: String, amount: Double) {
         userRepository.findByName(username)?.let { user ->
             val friendsGroup = friendsGroupRepository.getGroupOf(user)
-            sharedExpensesRepository.save(
-                SharedExpent(user, amount, detail, now(), friendsGroup)
-            )
+            sharedExpensesRepository.save(SharedExpent(user, amount, detail, now(), friendsGroup))
         }
     }
 
