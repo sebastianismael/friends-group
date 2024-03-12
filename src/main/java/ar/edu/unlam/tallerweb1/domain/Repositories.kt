@@ -20,7 +20,7 @@ object Repositories {
         getRepository(PaymentRepository::class.java, MySqlDataSource.instance())
 
     // TODO mecanismo para proveer las implementaciones de los repositorios que estan en infraestructura.
-    //  * mejora #1: usa una libreria externa, no ecncontre un mecanismo nativo en java para conocer las clases que
+    //  * mejora #1: usa una libreria externa, no enccontre un mecanismo nativo en java para conocer las clases que
     //  implementan una interface, buscar alguna forma nativa de resolverlo
     //  * mejora #2: manejar los repositorios como singleton, ya que estamos instanciando el repo cada vez.
     //  * mejora #3: no soporta mas de una implementacion de la interface
