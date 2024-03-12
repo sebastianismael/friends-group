@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.RED
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.TAB
 import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
 import javax.servlet.http.HttpServletRequest
+import kotlin.collections.Map.Entry
 
 class ShowBalance(private val friendsGroupService: FriendsGroupService) : Controller {
     override fun invoke(request: HttpServletRequest): String {
@@ -26,21 +27,22 @@ class ShowBalance(private val friendsGroupService: FriendsGroupService) : Contro
     private fun formatResults(balance: Map<String, Double>): String {
         val buffer = StringBuilder()
         buffer.append(BALANCE_HEADER)
-        balance.entries.forEach { formatBalanceLine(buffer, it) }
+        balance.entries.forEach { buffer.formatBalanceLine(it) }
         buffer.append(CLOSE_DIV)
         return buffer.toString()
     }
+}
 
-    private fun formatBalanceLine(sb: StringBuilder, entry: Map.Entry<String, Double>) {
-        sb.append("<p>")
-        sb.append(entry.key.trim())
-        sb.append(TAB).append(TAB)
-        sb.append(entry.value.format())
-        sb.append("</p>")
-    }
+private fun StringBuilder.formatBalanceLine(entry: Entry<String, Double>) {
+    this.append("<p>")
+    this.append(entry.key.trim())
+    this.append(TAB).append(TAB)
+    this.append(entry.value.format())
+    this.append("</p>")
 
-    private fun Double.format(): String {
-        val str = if (this >= 0) GREEN else RED
-        return "$str$this$EURO</span>"
-    }
+}
+
+private fun Double.format(): String {
+    val str = if (this >= 0) GREEN else RED
+    return "$str$this$EURO</span>"
 }
