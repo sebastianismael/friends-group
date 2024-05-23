@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static ar.edu.unlam.tallerweb1.delivery.HtmlStrings.*;
+import static java.lang.String.format;
+import static java.time.Duration.between;
+import static java.time.LocalDateTime.now;
 
 public class ListSharedExpenses implements Controller {
 
@@ -37,7 +40,7 @@ public class ListSharedExpenses implements Controller {
     }
 
     private static String header(String user) {
-        return String.format(EXPENSES_HEADER, user, user, user);
+        return format(EXPENSES_HEADER, user, user, user);
     }
 
     private void formatExpent(StringBuilder sb, SharedExpent each) {
@@ -52,14 +55,14 @@ public class ListSharedExpenses implements Controller {
     }
 
     private long daysBeforeToday(LocalDateTime date) {
-        return Duration.between(date, LocalDateTime.now()).toDays();
+        return between(date, now()).toDays();
     }
 
     private String formatDays(long days) {
-        return String.format(EXPEND_SINCE_DAYS, days);
+        return format(EXPEND_SINCE_DAYS, days);
     }
 
     private String formatMinutes(LocalDateTime date) {
-        return String.format(EXPEND_SINCE_MINUTES, Duration.between(date, LocalDateTime.now()).toMinutes());
+        return format(EXPEND_SINCE_MINUTES, between(date, now()).toMinutes());
     }
 }

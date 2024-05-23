@@ -13,11 +13,12 @@ import java.io.PrintWriter;
 
 import static ar.edu.unlam.tallerweb1.delivery.Controllers.resolve;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class ApiDispatcherServlet extends HttpServlet {
 
     private Gson parser = new Gson();
-    private static Logger logger = LoggerFactory.getLogger(ApiDispatcherServlet.class);
+    private static Logger logger = getLogger(ApiDispatcherServlet.class);
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doAction(request, response);
     }

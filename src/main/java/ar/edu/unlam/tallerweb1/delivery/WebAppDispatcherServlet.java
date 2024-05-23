@@ -11,10 +11,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import static ar.edu.unlam.tallerweb1.delivery.Controllers.resolve;
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class WebAppDispatcherServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(WebAppDispatcherServlet.class);
+    private static Logger logger = getLogger(WebAppDispatcherServlet.class);
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doAction(request, response);
     }

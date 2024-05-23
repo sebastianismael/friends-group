@@ -10,10 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static java.time.LocalDateTime.now;
+import static java.util.Collections.EMPTY_LIST;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -124,9 +127,9 @@ public class FriendsGroupServiceTest {
         givenAGroupWith(4);
 
         List<SharedExpent> expenses = new LinkedList<>();
-        SharedExpent e1 = new SharedExpent(1l, new User(USER), 120.0, "cena", LocalDateTime.now(), null);
+        SharedExpent e1 = new SharedExpent(1l, new User(USER), 120.0, "cena", now(), null);
         expenses.add(e1);
-        SharedExpent e2 = new SharedExpent(12l, new User(FRIEND_1), 120.0, "almuerzo", LocalDateTime.now(), null);
+        SharedExpent e2 = new SharedExpent(12l, new User(FRIEND_1), 120.0, "almuerzo", now(), null);
         expenses.add(e2);
         givenGroupHasAnExpents(expenses);
 
@@ -144,9 +147,9 @@ public class FriendsGroupServiceTest {
         givenAGroupWith(4);
 
         List<SharedExpent> expenses = new LinkedList<>();
-        SharedExpent e1 = new SharedExpent(1l, new User(USER), 120.0, "cena", LocalDateTime.now(), null);
+        SharedExpent e1 = new SharedExpent(1l, new User(USER), 120.0, "cena", now(), null);
         expenses.add(e1);
-        SharedExpent e2 = new SharedExpent(12l, new User(FRIEND_1), 120.0, "almuerzo", LocalDateTime.now(), null);
+        SharedExpent e2 = new SharedExpent(12l, new User(FRIEND_1), 120.0, "almuerzo", now(), null);
         expenses.add(e2);
         givenGroupHasAnExpents(expenses);
 
@@ -187,7 +190,7 @@ public class FriendsGroupServiceTest {
     }
 
     private void givenGroupHasNotExpenses() {
-        when(sharedExpensesRepository.findBy(any())).thenReturn(new LinkedList<>());
+        when(sharedExpensesRepository.findBy(any())).thenReturn(EMPTY_LIST);
     }
 
     private void givenGroupHasAnExpents(Long id, String payer, double amount) {
@@ -214,7 +217,7 @@ public class FriendsGroupServiceTest {
         FriendsGroup mockGroup = mock(FriendsGroup.class);
         when(mockUser.getFriendsGroup()).thenReturn(mockGroup);
         when(userRepository.findByName(user)).thenReturn(mockUser);
-        when(friendsGroupRepository.getMembers(any())).thenReturn(new LinkedList<>());
+        when(friendsGroupRepository.getMembers(any())).thenReturn(EMPTY_LIST);
     }
 
     private void givenUserWithFriensGroup(String user) {
@@ -253,6 +256,6 @@ public class FriendsGroupServiceTest {
     }
 
     private SharedExpent aSharedExpentWith(Long id, String payer, double amount) {
-        return new SharedExpent(id, new User(payer), amount, "detail", LocalDateTime.now(), new FriendsGroup(1l, ""));
+        return new SharedExpent(id, new User(payer), amount, "detail", now(), new FriendsGroup(1l, ""));
     }
 }

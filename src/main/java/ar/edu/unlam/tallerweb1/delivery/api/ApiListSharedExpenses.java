@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import static java.lang.String.valueOf;
+import static java.time.Duration.between;
+import static java.time.LocalDateTime.now;
 import static java.util.stream.Collectors.toList;
 
 public class ApiListSharedExpenses implements Controller {
@@ -53,7 +56,7 @@ public class ApiListSharedExpenses implements Controller {
         }
 
         private String formatMinutes(LocalDateTime date) {
-            return String.valueOf(Duration.between(date, LocalDateTime.now()).toMinutes());
+            return valueOf(between(date, now()).toMinutes());
         }
 
     }

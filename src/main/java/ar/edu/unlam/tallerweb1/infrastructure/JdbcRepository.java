@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public abstract class JdbcRepository {
 
     private DataSource dataSource;
@@ -18,7 +20,7 @@ public abstract class JdbcRepository {
 
         this.dataSource = dataSource;
     }
-    private static Logger logger = LoggerFactory.getLogger(JdbcRepository.class);
+    private static Logger logger = getLogger(JdbcRepository.class);
     protected <T> List<T> searchInTransaction(BiFunction<Connection, String, List<T>> function, String inputValue){
         try (final Connection conn = dataSource.getConnection()){
             return function.apply(conn, inputValue);

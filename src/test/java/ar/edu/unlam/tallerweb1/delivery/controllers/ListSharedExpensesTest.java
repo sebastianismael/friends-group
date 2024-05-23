@@ -15,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NO_EXPENSES;
+import static java.time.LocalDateTime.now;
+import static java.time.temporal.ChronoUnit.DAYS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -60,7 +62,7 @@ public class ListSharedExpensesTest {
                 new User(1L, "Francisco Buyo"),
                 100.0,
                 "Cena",
-                LocalDateTime.now().plus(-5, ChronoUnit.DAYS),
+                now().plus(-5, DAYS),
                 group));
 
         list.add(new SharedExpent(
@@ -68,7 +70,7 @@ public class ListSharedExpensesTest {
                 new User(2L, "Alfonso Perez"),
                 53.40,
                 "Taxi",
-                LocalDateTime.now().plus(-12, ChronoUnit.DAYS),
+                now().plus(-12, DAYS),
                 group));
 
         when(repository.findBy(user)).thenReturn(list);

@@ -7,12 +7,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class MariaDb4TestDataSource implements DataSource {
 
     private final String URL = "jdbc:mysql://localhost";
     private final String USER = "root";
     private final String PASSWORD = "";
-    private static final Logger LOGGER = LoggerFactory.getLogger(MariaDb4TestDataSource.class);
+    private static final Logger LOGGER = getLogger(MariaDb4TestDataSource.class);
     private static final MariaDb4TestDataSource INSTANCE = new MariaDb4TestDataSource();
 
     private MariaDb4TestDataSource() {

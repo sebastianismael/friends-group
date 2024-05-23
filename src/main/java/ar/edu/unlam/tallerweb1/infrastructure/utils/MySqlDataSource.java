@@ -10,9 +10,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class MySqlDataSource implements DataSource {
 
-    private static Logger logger = LoggerFactory.getLogger(MySqlDataSource.class);
+    private static Logger logger = getLogger(MySqlDataSource.class);
     private static MySqlDataSource instance = new MySqlDataSource();
     private MySqlDataSource(){}
 

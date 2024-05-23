@@ -8,10 +8,10 @@ import ar.edu.unlam.tallerweb1.domain.model.SharedExpent;
 import ar.edu.unlam.tallerweb1.domain.model.User;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.time.LocalDateTime.now;
+import static java.util.Collections.EMPTY_MAP;
 
 public class FriendsGroupService {
     private final UserRepository userRepository;
@@ -39,10 +39,10 @@ public class FriendsGroupService {
 
     public Map<String, Double> getBalance(String username) {
         final User user = findExistingUser(username);
-        if(!user.hasFriendGroup()) return new LinkedHashMap<>();
+        if(!user.hasFriendGroup()) return EMPTY_MAP;
 
         final List<User> members = getFriendsOf(user);
-        if(members.isEmpty()) return new LinkedHashMap<>();
+        if(members.isEmpty()) return EMPTY_MAP;
 
         return buildBalance(username, members);
     }
@@ -51,7 +51,7 @@ public class FriendsGroupService {
         final User user = userRepository.findByName(username);
         final FriendsGroup friendsGroup = friendsGroupRepository.getGroupOf(user);
         sharedExpensesRepository.save(
-                new SharedExpent(user, amount, detail, LocalDateTime.now(), friendsGroup)
+                new SharedExpent(user, amount, detail, now(), friendsGroup)
         );
     }
 

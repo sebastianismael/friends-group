@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static ar.edu.unlam.tallerweb1.infrastructure.utils.TestsPersistenceHelper.*;
+import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SharedExpensesJdbcRepositoryTestIT extends JdbcRepositoryTestIT {
@@ -61,7 +62,7 @@ public class SharedExpensesJdbcRepositoryTestIT extends JdbcRepositoryTestIT {
     }
 
     private void whenAddAnExpent(User owner, Long groupId) {
-        SharedExpent expent = new SharedExpent(owner, 333.3, "detail", LocalDateTime.now(), new FriendsGroup(groupId, ""));
+        SharedExpent expent = new SharedExpent(owner, 333.3, "detail", now(), new FriendsGroup(groupId, ""));
         repository.save(expent);
     }
 

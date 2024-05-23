@@ -12,9 +12,13 @@ import org.junit.jupiter.api.Test;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.time.LocalDateTime.now;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.util.Collections.EMPTY_LIST;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -59,7 +63,7 @@ public class ApiListSharedExpensesTest {
                 new User(1L, "Francisco Buyo"),
                 100.0,
                 "Cena",
-                LocalDateTime.now().plus(-5, ChronoUnit.DAYS),
+                now().plus(-5, DAYS),
                 group));
 
         list.add(new SharedExpent(
@@ -67,14 +71,14 @@ public class ApiListSharedExpensesTest {
                 new User(2L, "Alfonso Perez"),
                 53.40,
                 "Taxi",
-                LocalDateTime.now().plus(-12, ChronoUnit.DAYS),
+                now().plus(-12, DAYS),
                 group));
 
         when(repository.findBy(user)).thenReturn(list);
     }
 
     private void givenThereIsNotExpensesForGroupOf(String user) {
-        when(repository.findBy(user)).thenReturn(new LinkedList<>());
+        when(repository.findBy(user)).thenReturn(EMPTY_LIST);
     }
 
     private List<SharedExpent> whenGetSharedExpensesOfGroupWithUser(String user) {
