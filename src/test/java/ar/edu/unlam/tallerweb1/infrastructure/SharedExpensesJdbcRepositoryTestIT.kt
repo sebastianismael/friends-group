@@ -12,6 +12,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.SQLException
 import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 
 class SharedExpensesJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
     private val USER_1 = "user_1"
@@ -84,7 +85,7 @@ class SharedExpensesJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
     }
 
     private fun whenAddAnExpent(owner: User, groupId: Long) {
-        val expent = SharedExpent(owner, 333.3, "detail", LocalDateTime.now(), FriendsGroup(groupId, ""))
+        val expent = SharedExpent(owner, 333.3, "detail", now(), FriendsGroup(groupId, ""))
         repository.save(expent)
     }
 
