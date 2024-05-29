@@ -16,14 +16,6 @@ object JdbcUtil {
         }
     }
 
-    fun setLong(index: Int, value: Long, preparedStatement: PreparedStatement) {
-        try {
-            preparedStatement.setLong(index, value)
-        } catch (e: SQLException) {
-            throw RuntimeException(e)
-        }
-    }
-
     fun setDouble(index: Int, value: Double, preparedStatement: PreparedStatement) {
         try {
             preparedStatement.setDouble(index, value)
@@ -103,4 +95,13 @@ object JdbcUtil {
             throw RuntimeException(e)
         }
     }
+}
+
+fun PreparedStatement.withLong(index: Int, value: Long): PreparedStatement {
+    try {
+        this.setLong(index, value)
+    } catch (e: SQLException) {
+        throw RuntimeException(e)
+    }
+    return this
 }

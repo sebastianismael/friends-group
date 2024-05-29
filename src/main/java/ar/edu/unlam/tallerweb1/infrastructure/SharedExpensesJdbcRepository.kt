@@ -17,8 +17,8 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setDate
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setDouble
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
 import java.sql.Connection
 import java.sql.ResultSet
 
@@ -44,8 +44,8 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
         executeInTransaction { connection: Connection ->
             val sql = "INSERT INTO shared_expenses (friends_group_id, owner, amount, detail, status, date) VALUES (?,?,?,?,?,?)"
             val ps = prepareStatement(connection, sql)
-            setLong(1, sharedExpent.friendsGroup?.id!!, ps)
-            setLong(2, sharedExpent.owner.id!!, ps)
+                .withLong(1, sharedExpent.friendsGroup?.id!!)
+                .withLong(2, sharedExpent.owner.id!!)
             setDouble(3, sharedExpent.amount, ps)
             setString(4, sharedExpent.detail!!, ps)
             setString(5, OPEN.name, ps)
@@ -72,7 +72,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     private fun searchOwner(connection: Connection, userId: Long): User {
         val sql = "select * from user where id = ?"
         val expensesStatement = prepareStatement(connection, sql)
-        setLong(1, userId, expensesStatement)
+            .withLong(1, userId)
         val users = executeQuery(expensesStatement)
         if (next(users))
             return User(getLong("id", users), getString("name", users))
@@ -82,7 +82,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     private fun searchSharedExpenses(connection: Connection, resultSet: ResultSet): ResultSet {
         val sql = "select * from shared_expenses where friends_group_id = ? and status = '$OPEN' order by date desc"
         val expensesStatement = prepareStatement(connection, sql)
-        setLong(1, getLong("friends_group_id", resultSet), expensesStatement)
+            .withLong(1, getLong("friends_group_id", resultSet))
         return executeQuery(expensesStatement)
     }
 

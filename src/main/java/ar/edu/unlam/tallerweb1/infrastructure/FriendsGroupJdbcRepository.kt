@@ -9,8 +9,8 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
 import java.sql.Connection
 
 class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource), FriendsGroupRepository {
@@ -20,7 +20,7 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
                 val found= mutableListOf<User>()
                 val sql = "select * from user where friends_group_id = ?"
                 val ps = prepareStatement(connection, sql)
-                setLong(1, groupId.toLong(), ps)
+                    .withLong(1, groupId.toLong())
                 val users = executeQuery(ps)
                 while (next(users))
                     found.add(User(getLong("id", users), getString("name", users)))
@@ -39,7 +39,7 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
                     val groupId = getLong("friends_group_id", rs)
                     val sql = "select * from friends_group where id = ?"
                     val psGroup = prepareStatement(connection, sql)
-                    setLong(1, groupId, psGroup)
+                        .withLong(1, groupId)
                     val rsGroup = executeQuery(psGroup)
                     if (next(rsGroup))
                         return@findInTransaction FriendsGroup(groupId, getString("name", rsGroup))
@@ -48,4 +48,6 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
             },
             user.name)
     }
+
 }
+

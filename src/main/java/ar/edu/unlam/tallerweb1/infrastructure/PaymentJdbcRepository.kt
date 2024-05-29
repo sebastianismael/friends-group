@@ -13,7 +13,7 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
 import java.sql.Connection
 import java.sql.ResultSet
 
@@ -26,7 +26,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
 
                 val sql = "select * from payment where expent_id = ?"
                 val ps = prepareStatement(connection, sql)
-                setLong(1, expentId, ps)
+                    .withLong(1, expentId)
                 val rs = executeQuery(ps)
                 while (next(rs))
                     found.add(buildPayment(connection, expent, rs))
@@ -45,7 +45,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
 
     private fun getExpent(connection: Connection, expentId: Long): SharedExpent {
         val ps = prepareStatement(connection, "select * from shared_expenses where id = ?")
-        setLong(1, expentId, ps)
+            .withLong(1, expentId)
         val rs = executeQuery(ps)
         if (next(rs))
             return SharedExpent(
@@ -61,7 +61,7 @@ class PaymentJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource)
 
     private fun getUser(connection: Connection, payerId: Long): User {
         val ps = prepareStatement(connection, "select name from user where id = ?")
-        setLong(1, payerId, ps)
+            .withLong(1, payerId)
         val rs = executeQuery(ps)
         if (next(rs))
             return  User(payerId, getString("name", rs))

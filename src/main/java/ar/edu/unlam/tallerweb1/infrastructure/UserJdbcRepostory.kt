@@ -10,8 +10,8 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
 import java.sql.Connection
 
 class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), UserRepository {
@@ -27,8 +27,8 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
             executeInTransaction { connection: Connection ->
             val sql = "INSERT INTO user (name, friends_group_id) VALUES (?,?)"
             val ps = prepareStatement(connection, sql)
+                .withLong(2, user.friendsGroup?.id!!)
             setString(1, user.name, ps)
-            setLong(2, user.friendsGroup?.id!!, ps)
             execute(ps)
         }
 
