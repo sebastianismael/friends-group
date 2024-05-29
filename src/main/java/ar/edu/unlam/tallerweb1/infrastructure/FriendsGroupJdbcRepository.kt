@@ -9,8 +9,8 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withString
 import java.sql.Connection
 
 class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSource), FriendsGroupRepository {
@@ -33,7 +33,7 @@ class FriendsGroupJdbcRepository(dataSource: DataSource) : JdbcRepository(dataSo
         return findInTransaction(
             { connection: Connection, username: String ->
                 val ps = prepareStatement(connection, "select friends_group_id from user where name = ?")
-                setString(1, username, ps)
+                    .withString(1, username)
                 val rs = executeQuery(ps)
                 if (next(rs)) {
                     val groupId = getLong("friends_group_id", rs)

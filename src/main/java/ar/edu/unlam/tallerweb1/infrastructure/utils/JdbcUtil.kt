@@ -16,22 +16,6 @@ object JdbcUtil {
         }
     }
 
-    fun setDouble(index: Int, value: Double, preparedStatement: PreparedStatement) {
-        try {
-            preparedStatement.setDouble(index, value)
-        } catch (e: SQLException) {
-            throw RuntimeException(e)
-        }
-    }
-
-    fun setString(index: Int, value: String, preparedStatement: PreparedStatement) {
-        try {
-            preparedStatement.setString(index, value)
-        } catch (e: SQLException) {
-            throw RuntimeException(e)
-        }
-    }
-
     fun setDate(index: Int, value: LocalDateTime, preparedStatement: PreparedStatement) {
         try {
             preparedStatement.setDate(index, valueOf(value.toLocalDate()))
@@ -100,6 +84,24 @@ object JdbcUtil {
 fun PreparedStatement.withLong(index: Int, value: Long): PreparedStatement {
     try {
         this.setLong(index, value)
+    } catch (e: SQLException) {
+        throw RuntimeException(e)
+    }
+    return this
+}
+
+fun PreparedStatement.withDouble(index: Int, value: Double): PreparedStatement {
+    try {
+        this.setDouble(index, value)
+    } catch (e: SQLException) {
+        throw RuntimeException(e)
+    }
+    return this
+}
+
+fun PreparedStatement.withString(index: Int, value: String): PreparedStatement {
+    try {
+        this.setString(index, value)
     } catch (e: SQLException) {
         throw RuntimeException(e)
     }

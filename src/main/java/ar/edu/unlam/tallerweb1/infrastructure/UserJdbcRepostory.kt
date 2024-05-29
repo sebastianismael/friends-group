@@ -10,8 +10,8 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withString
 import java.sql.Connection
 
 class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), UserRepository {
@@ -19,7 +19,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
         executeInTransaction { connection: Connection ->
             val sql = "INSERT INTO user (name) VALUES (?)"
             val ps = prepareStatement(connection, sql)
-            setString(1, user.name, ps)
+                .withString(1, user.name)
             execute(ps)
         }
 
@@ -28,7 +28,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
             val sql = "INSERT INTO user (name, friends_group_id) VALUES (?,?)"
             val ps = prepareStatement(connection, sql)
                 .withLong(2, user.friendsGroup?.id!!)
-            setString(1, user.name, ps)
+                .withString(1, user.name)
             execute(ps)
         }
 
@@ -36,7 +36,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
         findInTransaction({ connection: Connection, username: String ->
             val sql = "select * from user where name = ?"
             val ps = prepareStatement(connection, sql)
-            setString(1, username, ps)
+                .withString(1, username)
             val users = executeQuery(ps)
             if (next(users)) {
                 val user = User(getLong("id", users), getString("name", users))

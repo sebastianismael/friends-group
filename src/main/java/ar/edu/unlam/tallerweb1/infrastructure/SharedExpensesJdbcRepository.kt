@@ -16,9 +16,9 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setDate
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setDouble
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setString
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withDouble
 import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
+import ar.edu.unlam.tallerweb1.infrastructure.utils.withString
 import java.sql.Connection
 import java.sql.ResultSet
 
@@ -46,9 +46,9 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
             val ps = prepareStatement(connection, sql)
                 .withLong(1, sharedExpent.friendsGroup?.id!!)
                 .withLong(2, sharedExpent.owner.id!!)
-            setDouble(3, sharedExpent.amount, ps)
-            setString(4, sharedExpent.detail!!, ps)
-            setString(5, OPEN.name, ps)
+                .withDouble(3, sharedExpent.amount)
+                .withString(4, sharedExpent.detail!!)
+                .withString(5, OPEN.name)
             setDate(6, sharedExpent.date, ps)
             execute(ps)
         }
@@ -89,7 +89,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     private fun searchGroupOf(connection: Connection, userName: String): ResultSet {
         val sql = "select * from user where name = ?"
         val userStatement = prepareStatement(connection, sql)
-        setString(1, userName, userStatement)
+            .withString(1, userName)
         return executeQuery(userStatement)
     }
 }
