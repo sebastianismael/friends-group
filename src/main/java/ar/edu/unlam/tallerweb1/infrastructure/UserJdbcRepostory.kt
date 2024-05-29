@@ -4,7 +4,6 @@ import ar.edu.unlam.tallerweb1.domain.UserRepository
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.execute
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.executeQuery
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
@@ -20,7 +19,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
             val sql = "INSERT INTO user (name) VALUES (?)"
             val ps = prepareStatement(connection, sql)
                 .withString(1, user.name)
-            execute(ps)
+                .execute()
         }
 
     override fun saveWithFriendGroup(user: User) =
@@ -29,7 +28,7 @@ class UserJdbcRepostory(dataSource: DataSource) : JdbcRepository(dataSource), Us
             val ps = prepareStatement(connection, sql)
                 .withLong(2, user.friendsGroup?.id!!)
                 .withString(1, user.name)
-            execute(ps)
+                .execute()
         }
 
     override fun findByName(name: String) =

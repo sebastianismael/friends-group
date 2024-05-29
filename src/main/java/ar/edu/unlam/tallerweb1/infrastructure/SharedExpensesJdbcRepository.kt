@@ -7,7 +7,6 @@ import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
 import ar.edu.unlam.tallerweb1.infrastructure.utils.*
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.execute
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.executeQuery
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getDate
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getDouble
@@ -39,14 +38,14 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
     override fun save(sharedExpent: SharedExpent) {
         executeInTransaction { connection: Connection ->
             val sql = "INSERT INTO shared_expenses (friends_group_id, owner, amount, detail, status, date) VALUES (?,?,?,?,?,?)"
-            val ps = prepareStatement(connection, sql)
+            prepareStatement(connection, sql)
                 .withLong(1, sharedExpent.friendsGroup?.id!!)
                 .withLong(2, sharedExpent.owner.id!!)
                 .withDouble(3, sharedExpent.amount)
                 .withString(4, sharedExpent.detail!!)
                 .withString(5, OPEN.name)
                 .withDate(6, sharedExpent.date)
-            execute(ps)
+                .execute()
         }
     }
 

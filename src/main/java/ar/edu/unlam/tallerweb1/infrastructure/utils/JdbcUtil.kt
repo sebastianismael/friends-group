@@ -24,14 +24,6 @@ object JdbcUtil {
         }
     }
 
-    fun execute(preparedStatement: PreparedStatement): Int {
-        try {
-            return preparedStatement.executeUpdate()
-        } catch (e: SQLException) {
-            throw RuntimeException(e)
-        }
-    }
-
     fun next(resultSet: ResultSet): Boolean {
         try {
             return resultSet.next()
