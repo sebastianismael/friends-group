@@ -6,7 +6,7 @@ import ar.edu.unlam.tallerweb1.domain.model.ExpentStatus.OPEN
 import ar.edu.unlam.tallerweb1.domain.model.FriendsGroup
 import ar.edu.unlam.tallerweb1.domain.model.SharedExpent
 import ar.edu.unlam.tallerweb1.domain.model.User
-import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
+import ar.edu.unlam.tallerweb1.infrastructure.utils.*
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.execute
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.executeQuery
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getDate
@@ -15,10 +15,6 @@ import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getLong
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.getString
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.next
 import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.prepareStatement
-import ar.edu.unlam.tallerweb1.infrastructure.utils.JdbcUtil.setDate
-import ar.edu.unlam.tallerweb1.infrastructure.utils.withDouble
-import ar.edu.unlam.tallerweb1.infrastructure.utils.withLong
-import ar.edu.unlam.tallerweb1.infrastructure.utils.withString
 import java.sql.Connection
 import java.sql.ResultSet
 
@@ -49,7 +45,7 @@ class SharedExpensesJdbcRepository(dataSource: DataSource) : JdbcRepository(data
                 .withDouble(3, sharedExpent.amount)
                 .withString(4, sharedExpent.detail!!)
                 .withString(5, OPEN.name)
-            setDate(6, sharedExpent.date, ps)
+                .withDate(6, sharedExpent.date)
             execute(ps)
         }
     }
