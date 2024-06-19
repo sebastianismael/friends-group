@@ -8,6 +8,8 @@ import ar.edu.unlam.tallerweb1.delivery.util.CreateSchema
 import ar.edu.unlam.tallerweb1.delivery.util.LoadData
 import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.Services.getFriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.UseCases
+import ar.edu.unlam.tallerweb1.domain.UseCases.addFriendsToGroup
 
 class Controllers {
     companion object {
@@ -18,7 +20,7 @@ class Controllers {
             controllers["/"] = Index()
             controllers["/list-expenses"] = ListSharedExpenses(getSharedExpensesRepository())
             controllers["/goto-add-friend"] = GoToAddFriend()
-            controllers["/add-friend"] = AddFriend(getFriendsGroupService())
+            controllers["/add-friend"] = AddFriend(addFriendsToGroup())
             controllers["/balance"] = ShowBalance(getFriendsGroupService())
             controllers["/goto-add-expent"] = GoToAddExpent()
             controllers["/add-expent"] = AddExpent(getFriendsGroupService())

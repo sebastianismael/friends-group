@@ -42,29 +42,6 @@ class FriendsGroupServiceTest {
     }
 
     @Test
-    fun addFriendShouldThrowAnErrorIfUserNotExists() {
-        assertThrows(UserNotExists::class.java) {
-            givenNotExistsUser(USER)
-            whenAddFriend(USER, FRIEND)
-        }
-    }
-
-    @Test
-    fun addFriendShouldThrowAnErrorIfUserDoesHaveAFriendGroup() {
-        assertThrows(UserWithoutFriendsGroup::class.java) {
-            givenUserWithoutFriensGroup(USER)
-            whenAddFriend(USER, FRIEND)
-        }
-    }
-
-    @Test
-    fun canAddFriendToMyGroup() {
-        givenUserWithFriensGroup(USER)
-        whenAddFriend(USER, FRIEND)
-        thenFriendIsAdded()
-    }
-
-    @Test
     fun balanceShouldBeEmptyIfThereIsNotFriendsInGroup() {
         givenAnEmptyFriendsGroup(USER)
         val balance = whenGetBalance(USER)
@@ -205,11 +182,9 @@ class FriendsGroupServiceTest {
 
     private fun givenNotExistsUser(user: String) = whenever(userRepository.findByName(user)) doReturn null
 
-    private fun whenAddFriend(user: String, friend: String) = friendsGroupService.addFriendsToGroup(user, friend)
 
     private fun whenGetBalance(user: String): Map<String, Double> = friendsGroupService.getBalance(user)
 
-    private fun thenFriendIsAdded() = verify(userRepository, times(1)).saveWithFriendGroup(any())
 
     private fun thenTheBalanceIsEmpty(balance: Map<String, Double>) = assertThat(balance).isEmpty()
 

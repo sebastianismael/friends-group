@@ -9,7 +9,6 @@ import ar.edu.unlam.tallerweb1.domain.model.User
 import java.time.LocalDateTime.now
 
 interface FriendsGroupService {
-    fun addFriendsToGroup(username: String, newFriendName: String)
     fun getBalance(username: String): Map<String, Double>
     fun addExpentToGroup(username: String, detail: String, amount: Double)
 }
@@ -19,14 +18,6 @@ class FriendsGroupServiceImpl (
     private val sharedExpensesRepository: SharedExpensesRepository,
     private val paymentRepository: PaymentRepository
 ) : FriendsGroupService  {
-    override fun addFriendsToGroup(username: String, newFriendName: String) {
-        val user = findExistingUser(username)
-        if (!user.hasFriendGroup()) throw UserWithoutFriendsGroup(username)
-
-        val friend = User(newFriendName)
-        friend.friendsGroup = FriendsGroup(user.friendsGroup?.id!!, "")
-        userRepository.saveWithFriendGroup(friend)
-    }
 
     override fun getBalance(username: String): Map<String, Double> {
         val user = findExistingUser(username)
