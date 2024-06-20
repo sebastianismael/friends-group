@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import java.sql.Connection
 import java.sql.SQLException
 
-abstract class JdbcRepositoryTestIT {
+abstract class JdbcRepositoryTest {
     protected lateinit var connection: Connection
     var dataSource: DataSource = instance()
 

@@ -1,5 +1,9 @@
-package ar.edu.unlam.tallerweb1.domain
+package ar.edu.unlam.tallerweb1
 
+import ar.edu.unlam.tallerweb1.domain.FriendsGroupRepository
+import ar.edu.unlam.tallerweb1.domain.PaymentRepository
+import ar.edu.unlam.tallerweb1.domain.SharedExpensesRepository
+import ar.edu.unlam.tallerweb1.domain.UserRepository
 import ar.edu.unlam.tallerweb1.infrastructure.utils.DataSource
 import ar.edu.unlam.tallerweb1.infrastructure.utils.MySqlDataSource
 import org.reflections.Reflections
@@ -29,9 +33,9 @@ object Repositories {
     //  * mejora #3: no soporta mas de una implementacion de la interface
     private fun <T : Any> getImplementation(repository: KClass<T>, dataSource: MySqlDataSource): Any? {
 
-        if(!this.implementations.contains(repository))
-            this.implementations[repository] = getSubclassOf(repository).instantiate(dataSource)
-        return this.implementations[repository]
+        if(!implementations.contains(repository))
+            implementations[repository] = getSubclassOf(repository).instantiate(dataSource)
+        return implementations[repository]
     }
 
     private fun <T : Any> getSubclassOf(repository: KClass<T>): Class<out T> {

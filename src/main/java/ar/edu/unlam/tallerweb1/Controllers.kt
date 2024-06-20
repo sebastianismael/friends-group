@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.delivery
+package ar.edu.unlam.tallerweb1
 
 import ar.edu.unlam.tallerweb1.delivery.api.ApiListSharedExpenses
 import ar.edu.unlam.tallerweb1.delivery.api.ApiShowBalance
@@ -6,11 +6,11 @@ import ar.edu.unlam.tallerweb1.delivery.controllers.*
 import ar.edu.unlam.tallerweb1.delivery.util.CleanData
 import ar.edu.unlam.tallerweb1.delivery.util.CreateSchema
 import ar.edu.unlam.tallerweb1.delivery.util.LoadData
-import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
-import ar.edu.unlam.tallerweb1.domain.UseCases
-import ar.edu.unlam.tallerweb1.domain.UseCases.addExpentToGroup
-import ar.edu.unlam.tallerweb1.domain.UseCases.addFriendsToGroup
-import ar.edu.unlam.tallerweb1.domain.UseCases.getBalance
+import ar.edu.unlam.tallerweb1.Repositories.getSharedExpensesRepository
+import ar.edu.unlam.tallerweb1.UseCases.addExpentToGroup
+import ar.edu.unlam.tallerweb1.UseCases.addFriendsToGroup
+import ar.edu.unlam.tallerweb1.UseCases.getBalance
+import ar.edu.unlam.tallerweb1.delivery.Controller
 
 class Controllers {
     companion object {

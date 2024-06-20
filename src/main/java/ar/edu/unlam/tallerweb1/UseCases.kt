@@ -1,9 +1,9 @@
-package ar.edu.unlam.tallerweb1.domain
+package ar.edu.unlam.tallerweb1
 
-import ar.edu.unlam.tallerweb1.domain.Repositories.getFriendsGroupRepository
-import ar.edu.unlam.tallerweb1.domain.Repositories.getPaymentRepository
-import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
-import ar.edu.unlam.tallerweb1.domain.Repositories.getUserRepository
+import ar.edu.unlam.tallerweb1.Repositories.getFriendsGroupRepository
+import ar.edu.unlam.tallerweb1.Repositories.getPaymentRepository
+import ar.edu.unlam.tallerweb1.Repositories.getSharedExpensesRepository
+import ar.edu.unlam.tallerweb1.Repositories.getUserRepository
 import ar.edu.unlam.tallerweb1.domain.usecases.AddExpentToGroup
 import ar.edu.unlam.tallerweb1.domain.usecases.AddFriendsToGroup
 import ar.edu.unlam.tallerweb1.domain.usecases.GetBalance

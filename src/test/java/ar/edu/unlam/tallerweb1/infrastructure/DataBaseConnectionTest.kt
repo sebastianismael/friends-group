@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 import java.sql.SQLException
 
-class DataBaseConnectionTestIT : JdbcRepositoryTestIT() {
+class DataBaseConnectionTest : JdbcRepositoryTest() {
     @Test
     fun checkDbConnection() {
         try {

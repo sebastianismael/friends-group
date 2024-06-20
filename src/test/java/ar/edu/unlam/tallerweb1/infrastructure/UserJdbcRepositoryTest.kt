@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.SQLException
 
-class UserJdbcRepositoryTestIT : JdbcRepositoryTestIT() {
+class UserJdbcRepositoryTest : JdbcRepositoryTest() {
     private val userRepository: UserRepository = UserJdbcRepostory(dataSource)
     private val USER = "user_18989"
     private val GROUP = "group_sfaf1"

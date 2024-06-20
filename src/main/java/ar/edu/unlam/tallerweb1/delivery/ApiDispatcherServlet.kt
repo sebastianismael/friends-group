@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.delivery
 
-import ar.edu.unlam.tallerweb1.delivery.Controllers.Companion.resolve
+import ar.edu.unlam.tallerweb1.Controllers.Companion.resolve
 import ar.edu.unlam.tallerweb1.domain.exceptions.BusinessException
 import com.google.gson.Gson
 import org.slf4j.LoggerFactory.getLogger
