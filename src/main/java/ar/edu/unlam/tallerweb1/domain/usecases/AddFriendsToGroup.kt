@@ -10,7 +10,7 @@ class AddFriendsToGroup(
     private val userRepository: UserRepository
 ) {
 
-    public operator fun invoke(username: String, newFriendName: String){
+    operator fun invoke(username: String, newFriendName: String){
         val user = findExistingUser(username)
         if (!user.hasFriendGroup()) throw UserWithoutFriendsGroup(username)
 

@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
 import ar.edu.unlam.tallerweb1.domain.Services.getFriendsGroupService
 import ar.edu.unlam.tallerweb1.domain.UseCases
 import ar.edu.unlam.tallerweb1.domain.UseCases.addFriendsToGroup
+import ar.edu.unlam.tallerweb1.domain.UseCases.getBalance
 
 class Controllers {
     companion object {
@@ -21,7 +22,7 @@ class Controllers {
             controllers["/list-expenses"] = ListSharedExpenses(getSharedExpensesRepository())
             controllers["/goto-add-friend"] = GoToAddFriend()
             controllers["/add-friend"] = AddFriend(addFriendsToGroup())
-            controllers["/balance"] = ShowBalance(getFriendsGroupService())
+            controllers["/balance"] = ShowBalance(getBalance())
             controllers["/goto-add-expent"] = GoToAddExpent()
             controllers["/add-expent"] = AddExpent(getFriendsGroupService())
 
@@ -31,7 +32,7 @@ class Controllers {
             controllers["/create-schema"] = CreateSchema()
 
             controllers["/api/list-expenses"] = ApiListSharedExpenses(getSharedExpensesRepository())
-            controllers["/api/balance"] = ApiShowBalance(getFriendsGroupService())
+            controllers["/api/balance"] = ApiShowBalance(getBalance())
         }
 
         fun resolve(path: String)= getControllerFor(path).takeUnless { it == null } ?: throw Exception()

@@ -8,14 +8,14 @@ import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.GREEN
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.NO_EXPENSES
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.RED
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.TAB
-import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.usecases.GetBalance
 import javax.servlet.http.HttpServletRequest
 import kotlin.collections.Map.Entry
 
-class ShowBalance(private val friendsGroupService: FriendsGroupService) : Controller {
+class ShowBalance(private val getBalance: GetBalance) : Controller {
     override fun invoke(request: HttpServletRequest): String {
         val user = request.getParameter("user")
-        val balance = friendsGroupService.getBalance(user)
+        val balance = getBalance(user)
         return toHtml(balance)
     }
 
