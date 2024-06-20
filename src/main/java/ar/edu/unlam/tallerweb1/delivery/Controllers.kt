@@ -7,8 +7,8 @@ import ar.edu.unlam.tallerweb1.delivery.util.CleanData
 import ar.edu.unlam.tallerweb1.delivery.util.CreateSchema
 import ar.edu.unlam.tallerweb1.delivery.util.LoadData
 import ar.edu.unlam.tallerweb1.domain.Repositories.getSharedExpensesRepository
-import ar.edu.unlam.tallerweb1.domain.Services.getFriendsGroupService
 import ar.edu.unlam.tallerweb1.domain.UseCases
+import ar.edu.unlam.tallerweb1.domain.UseCases.addExpentToGroup
 import ar.edu.unlam.tallerweb1.domain.UseCases.addFriendsToGroup
 import ar.edu.unlam.tallerweb1.domain.UseCases.getBalance
 
@@ -24,7 +24,7 @@ class Controllers {
             controllers["/add-friend"] = AddFriend(addFriendsToGroup())
             controllers["/balance"] = ShowBalance(getBalance())
             controllers["/goto-add-expent"] = GoToAddExpent()
-            controllers["/add-expent"] = AddExpent(getFriendsGroupService())
+            controllers["/add-expent"] = AddExpent(addExpentToGroup())
 
             controllers["/alive"] = Alive()
             controllers["/load-data"] = LoadData()

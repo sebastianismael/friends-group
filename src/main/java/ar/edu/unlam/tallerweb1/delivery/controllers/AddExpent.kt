@@ -4,12 +4,12 @@ import ar.edu.unlam.tallerweb1.delivery.Controller
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_AMOUNT
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_DETAIL
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_SUCCESS
-import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.usecases.AddExpentToGroup
 import org.apache.logging.log4j.util.Strings.isBlank
 import org.apache.logging.log4j.util.Strings.isEmpty
 import javax.servlet.http.HttpServletRequest
 
-class AddExpent(private val friendsGroupService: FriendsGroupService) : Controller {
+class AddExpent(private val addExpentToGroup: AddExpentToGroup) : Controller {
     override operator fun invoke(request: HttpServletRequest): String {
         val user = request.getParameter("user")
 
@@ -19,7 +19,7 @@ class AddExpent(private val friendsGroupService: FriendsGroupService) : Controll
         val amount = request.getParameter("amount")
         if (isNotValid(amount)) return ADD_EXPENT_NO_AMOUNT
 
-        friendsGroupService.addExpentToGroup(user, detail, amount.toDouble())
+        addExpentToGroup(user, detail, amount.toDouble())
         return ADD_EXPENT_SUCCESS
     }
 

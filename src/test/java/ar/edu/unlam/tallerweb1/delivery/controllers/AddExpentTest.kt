@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.delivery.controllers
 
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_AMOUNT
 import ar.edu.unlam.tallerweb1.delivery.HtmlStrings.ADD_EXPENT_NO_DETAIL
-import ar.edu.unlam.tallerweb1.domain.FriendsGroupService
+import ar.edu.unlam.tallerweb1.domain.usecases.AddExpentToGroup
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest
 class AddExpentTest {
     private lateinit var request: HttpServletRequest
     private lateinit var controller: AddExpent
-    private lateinit var friendsGroupService: FriendsGroupService
+    private lateinit var addExpentToGroup: AddExpentToGroup
     private val USER = "user_1"
     private val DETAIL = "Cena"
     private val AMOUNT = "100.50"
@@ -23,9 +23,9 @@ class AddExpentTest {
         whenever(request.getParameter("user"))   doReturn  USER
         whenever(request.getParameter("amount")) doReturn  AMOUNT
         whenever(request.getParameter("detail")) doReturn  DETAIL
-        friendsGroupService = mock()
+        addExpentToGroup = mock()
 
-        controller = AddExpent(friendsGroupService)
+        controller = AddExpent(addExpentToGroup)
     }
 
     @Test
@@ -55,7 +55,7 @@ class AddExpentTest {
     private fun whenAddAnExpentToFriendsGroupOf(user: String) = controller(request)
 
     private fun thenAddExpentToGroup(detail: String, amount: String) =
-        verify(friendsGroupService, times(1)).addExpentToGroup(USER, detail, amount.toDouble())
+        verify(addExpentToGroup, times(1)).invoke(USER, detail, amount.toDouble())
 
     private fun thenGetErrorMessage(actual: String, expected: String) = assertThat(actual).isEqualTo(expected)
 }
